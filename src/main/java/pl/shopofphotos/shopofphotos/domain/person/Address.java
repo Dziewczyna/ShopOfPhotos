@@ -1,4 +1,4 @@
-package pl.shopofphotos.shopofphotos.domain.author;
+package pl.shopofphotos.shopofphotos.domain.person;
 
 public class Address {
     private String street;

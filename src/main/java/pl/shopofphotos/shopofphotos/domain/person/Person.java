@@ -1,6 +1,6 @@
-package pl.shopofphotos.shopofphotos.domain.author;
+package pl.shopofphotos.shopofphotos.domain.person;
 
-public class Author {
+public class Person {
     private String firstName;
     private String lastName;
     private Address address;
