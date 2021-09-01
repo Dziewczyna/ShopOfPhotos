@@ -1,18 +1,23 @@
 package pl.shopofphotos.shopofphotos.domain.price;
 
 public enum Currency {
-    PLN("PLN"),
-    USD("USD"),
-    EUR("EURO"),
-    BTC("BITCOIN");
+  PLN("PLN"),
+  USD("USD"),
+  EUR("EURO"),
+  BTC("BITCOIN");
 
-    public String getCurrency() {
-        return currency;
-    }
+  private final String currency;
 
-    Currency(String currency) {
-        this.currency = currency;
-    }
+  Currency(String currency) {
+    this.currency = currency;
+  }
 
-    private final String currency;
+  public String getCurrency() {
+    return currency;
+  }
+
+  @Override
+  public String toString() {
+    return "Currency{" + "currency='" + currency + '\'' + '}';
+  }
 }
