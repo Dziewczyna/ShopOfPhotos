@@ -28,9 +28,21 @@ public class ShopofphotosApplication {
     PlaceOfPhoto placeOfPhoto = new PlaceOfPhoto("Lublin");
     Category category = Category.ANIMALS;
     Price price = new Price(new BigDecimal("123.00"), Currency.PLN);
-    Person author =
-        new Person(
-            "Damian", "Muszka", new Address("Polna", "Lublin", "lubelskie", "20-714", Country.PL));
+
+    String authorStreet = "Polna";
+    String authorCity = "Lublin";
+    String authorState = "lubelskie";
+    String authorPostalCode = "20-714";
+    Country authorCountry = Country.PL;
+    Address authorAddress =
+        new Address.AddressBuilder()
+            .street(authorStreet)
+            .city(authorCity)
+            .state(authorState)
+            .postalCode(authorPostalCode)
+            .country(authorCountry)
+            .build();
+    Person author = new Person("Damian", "Muszka", authorAddress);
     Photo photo =
         new Photo.PhotoBuilder()
             .camera(camera)
@@ -42,11 +54,20 @@ public class ShopofphotosApplication {
             .author(author)
             .build();
 
-    Person buyer =
-        new Person(
-            "Jolanta",
-            "Patka",
-            new Address("Rolna", "Warszawa", "mazowieckie", "00-001", Country.PL));
+    String buyerStreet = "Rolna";
+    String buyerCity = "Warszawa";
+    String buyerState = "mazowieckie";
+    String buyerPostalCode = "00-001";
+    Country buyerCountry = Country.PL;
+    Address buyerAddress =
+        new Address.AddressBuilder()
+            .street(buyerStreet)
+            .city(buyerCity)
+            .state(buyerState)
+            .postalCode(buyerPostalCode)
+            .country(buyerCountry)
+            .build();
+    Person buyer = new Person("Jolanta", "Patka", buyerAddress);
 
     List<Photo> photos = new ArrayList<>();
     photos.add(photo);
