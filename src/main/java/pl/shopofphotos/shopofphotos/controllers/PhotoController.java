@@ -1,4 +1,3 @@
 package pl.shopofphotos.shopofphotos.controllers;
 
-public class PhotoController {
-}
+public class PhotoController {}

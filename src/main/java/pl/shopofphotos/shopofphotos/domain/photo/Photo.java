@@ -3,7 +3,6 @@ package pl.shopofphotos.shopofphotos.domain.photo;
 import pl.shopofphotos.shopofphotos.domain.Category;
 import pl.shopofphotos.shopofphotos.domain.PlaceOfPhoto;
 import pl.shopofphotos.shopofphotos.domain.camera.Camera;
-import pl.shopofphotos.shopofphotos.domain.dimension.Dimension;
 import pl.shopofphotos.shopofphotos.domain.person.Person;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
@@ -11,16 +10,29 @@ import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
 public class Photo {
   private final Camera camera;
   private final Resolution resolution;
-  private final Dimension dimension;
   private final PlaceOfPhoto placeOfPhoto;
   private final Category category;
   private final Price price;
   private final Person author;
 
+  protected Photo(
+      Camera camera,
+      Resolution resolution,
+      PlaceOfPhoto placeOfPhoto,
+      Category category,
+      Price price,
+      Person author) {
+    this.camera = camera;
+    this.resolution = resolution;
+    this.placeOfPhoto = placeOfPhoto;
+    this.category = category;
+    this.price = price;
+    this.author = author;
+  }
+
   private Photo(PhotoBuilder photoBuilder) {
     this.camera = photoBuilder.camera;
     this.resolution = photoBuilder.resolution;
-    this.dimension = photoBuilder.dimension;
     this.placeOfPhoto = photoBuilder.placeOfPhoto;
     this.category = photoBuilder.category;
     this.price = photoBuilder.price;
@@ -34,8 +46,6 @@ public class Photo {
         + camera
         + ", resolution="
         + resolution.toString()
-        + ", dimension="
-        + dimension
         + ", placeOfPhoto="
         + placeOfPhoto
         + ", category="
@@ -50,7 +60,6 @@ public class Photo {
   public static class PhotoBuilder {
     private Camera camera;
     private Resolution resolution;
-    private Dimension dimension;
     private PlaceOfPhoto placeOfPhoto;
     private Category category;
     private Price price;
@@ -63,11 +72,6 @@ public class Photo {
 
     public PhotoBuilder resolution(Resolution resolution) {
       this.resolution = resolution;
-      return this;
-    }
-
-    public PhotoBuilder dimension(Dimension dimension) {
-      this.dimension = dimension;
       return this;
     }
 

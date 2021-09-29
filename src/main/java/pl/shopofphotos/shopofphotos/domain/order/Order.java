@@ -13,6 +13,12 @@ public class Order {
   public Person author;
   public List<Photo> photos;
   public Price price;
+  private OrderMethod orderMethod;
+
+  public void chooseOrderMethod() {
+    System.out.println("Choose order method");
+    orderMethod.setUpOrderMethod();
+  }
 
   @Override
   public String toString() {

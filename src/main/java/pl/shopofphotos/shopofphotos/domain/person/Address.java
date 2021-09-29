@@ -38,40 +38,39 @@ public class Address {
         + '}';
   }
 
-  public static class AddressBuilder{
+  public static class AddressBuilder {
     private String street;
     private String city;
     private String state;
     private String postalCode;
     private Country country;
 
-
-    public AddressBuilder street(String street){
-      this.street=street;
+    public AddressBuilder street(String street) {
+      this.street = street;
       return this;
     }
 
-    public AddressBuilder city(String city){
-      this.city=city;
+    public AddressBuilder city(String city) {
+      this.city = city;
       return this;
     }
 
-    public AddressBuilder state(String state){
-      this.state=state;
+    public AddressBuilder state(String state) {
+      this.state = state;
       return this;
     }
 
-    public AddressBuilder postalCode(String postalCode){
-      this.postalCode=postalCode;
+    public AddressBuilder postalCode(String postalCode) {
+      this.postalCode = postalCode;
       return this;
     }
 
-    public AddressBuilder country(Country country){
-      this.country=country;
+    public AddressBuilder country(Country country) {
+      this.country = country;
       return this;
     }
 
-    public Address build(){
+    public Address build() {
       return new Address(this);
     }
   }

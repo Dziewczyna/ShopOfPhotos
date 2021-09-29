@@ -5,8 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.shopofphotos.shopofphotos.domain.Category;
 import pl.shopofphotos.shopofphotos.domain.PlaceOfPhoto;
 import pl.shopofphotos.shopofphotos.domain.camera.Camera;
-import pl.shopofphotos.shopofphotos.domain.dimension.Dimension;
 import pl.shopofphotos.shopofphotos.domain.order.MemoryBasedOrderRepository;
+import pl.shopofphotos.shopofphotos.domain.order.OnlineOrderMethod;
+import pl.shopofphotos.shopofphotos.domain.order.OrderRepository;
 import pl.shopofphotos.shopofphotos.domain.person.Address;
 import pl.shopofphotos.shopofphotos.domain.person.Country;
 import pl.shopofphotos.shopofphotos.domain.person.Person;
@@ -47,7 +48,6 @@ public class ShopofphotosApplication {
         new Photo.PhotoBuilder()
             .camera(camera)
             .resolution(resolution)
-            .dimension(Dimension.dimension1318)
             .placeOfPhoto(placeOfPhoto)
             .category(category)
             .price(price)
@@ -72,9 +72,11 @@ public class ShopofphotosApplication {
     List<Photo> photos = new ArrayList<>();
     photos.add(photo);
     Price priceOfOrder = new Price(new BigDecimal("123.00"), Currency.PLN);
+    OnlineOrderMethod orderMethod = new OnlineOrderMethod();
 
-    MemoryBasedOrderRepository memoryBasedOrderRepository = new MemoryBasedOrderRepository();
-    int placedOrderId = memoryBasedOrderRepository.placeOrder(buyer, author, photos, priceOfOrder);
+    OrderRepository memoryBasedOrderRepository = new MemoryBasedOrderRepository();
+    int placedOrderId =
+        memoryBasedOrderRepository.placeOrder(buyer, author, photos, priceOfOrder, orderMethod);
     memoryBasedOrderRepository.readOrder(placedOrderId);
 
     memoryBasedOrderRepository.deleteOrder(placedOrderId);

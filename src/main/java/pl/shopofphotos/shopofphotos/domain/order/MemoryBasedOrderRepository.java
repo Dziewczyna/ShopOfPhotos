@@ -11,8 +11,9 @@ public class MemoryBasedOrderRepository implements OrderRepository {
   private final List<Order> orders = new ArrayList<>();
 
   @Override
-  public int placeOrder(Person buyer, Person author, List<Photo> photos, Price price) {
-    Order order = new Order(buyer, author, photos, price);
+  public int placeOrder(
+      Person buyer, Person author, List<Photo> photos, Price price, OrderMethod orderMethod) {
+    Order order = new Order(buyer, author, photos, price, orderMethod);
     orders.add(order);
     System.out.println("Order with orderId=" + orders.indexOf(order) + " added");
     return orders.indexOf(order);
