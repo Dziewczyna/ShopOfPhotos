@@ -1,102 +1,52 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
-import pl.shopofphotos.shopofphotos.domain.Category;
-import pl.shopofphotos.shopofphotos.domain.PlaceOfPhoto;
-import pl.shopofphotos.shopofphotos.domain.camera.Camera;
 import pl.shopofphotos.shopofphotos.domain.person.Person;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
-import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
 
 public class Photo {
-  private final Camera camera;
-  private final Resolution resolution;
-  private final PlaceOfPhoto placeOfPhoto;
-  private final Category category;
   private final Price price;
   private final Person author;
+  private final PhotoDetails photoDetails;
+  private final PhotoTechnicalDetails photoTechnicalDetails;
 
-  protected Photo(
-      Camera camera,
-      Resolution resolution,
-      PlaceOfPhoto placeOfPhoto,
-      Category category,
+  public Photo(
       Price price,
-      Person author) {
-    this.camera = camera;
-    this.resolution = resolution;
-    this.placeOfPhoto = placeOfPhoto;
-    this.category = category;
+      Person author,
+      PhotoDetails photoDetails,
+      PhotoTechnicalDetails photoTechnicalDetails) {
     this.price = price;
     this.author = author;
+    this.photoDetails = photoDetails;
+    this.photoTechnicalDetails = photoTechnicalDetails;
   }
 
-  private Photo(PhotoBuilder photoBuilder) {
-    this.camera = photoBuilder.camera;
-    this.resolution = photoBuilder.resolution;
-    this.placeOfPhoto = photoBuilder.placeOfPhoto;
-    this.category = photoBuilder.category;
-    this.price = photoBuilder.price;
-    this.author = photoBuilder.author;
+  public Price getPrice() {
+    return price;
+  }
+
+  public Person getAuthor() {
+    return author;
+  }
+
+  public PhotoDetails getPhotoDetails() {
+    return photoDetails;
+  }
+
+  public PhotoTechnicalDetails getPhotoTechnicalDetails() {
+    return photoTechnicalDetails;
   }
 
   @Override
   public String toString() {
     return "Photo{"
-        + "camera="
-        + camera
-        + ", resolution="
-        + resolution.toString()
-        + ", placeOfPhoto="
-        + placeOfPhoto
-        + ", category="
-        + category
-        + ", price="
+        + "price="
         + price
         + ", author="
         + author
+        + ", photoDetails="
+        + photoDetails
+        + ", photoTechnicalDetails="
+        + photoTechnicalDetails
         + '}';
-  }
-
-  public static class PhotoBuilder {
-    private Camera camera;
-    private Resolution resolution;
-    private PlaceOfPhoto placeOfPhoto;
-    private Category category;
-    private Price price;
-    private Person author;
-
-    public PhotoBuilder camera(Camera camera) {
-      this.camera = camera;
-      return this;
-    }
-
-    public PhotoBuilder resolution(Resolution resolution) {
-      this.resolution = resolution;
-      return this;
-    }
-
-    public PhotoBuilder placeOfPhoto(PlaceOfPhoto placeOfPhoto) {
-      this.placeOfPhoto = placeOfPhoto;
-      return this;
-    }
-
-    public PhotoBuilder category(Category category) {
-      this.category = category;
-      return this;
-    }
-
-    public PhotoBuilder price(Price price) {
-      this.price = price;
-      return this;
-    }
-
-    public PhotoBuilder author(Person author) {
-      this.author = author;
-      return this;
-    }
-
-    public Photo build() {
-      return new Photo(this);
-    }
   }
 }

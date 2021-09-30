@@ -11,7 +11,7 @@ import pl.shopofphotos.shopofphotos.domain.order.OrderRepository;
 import pl.shopofphotos.shopofphotos.domain.person.Address;
 import pl.shopofphotos.shopofphotos.domain.person.Country;
 import pl.shopofphotos.shopofphotos.domain.person.Person;
-import pl.shopofphotos.shopofphotos.domain.photo.Photo;
+import pl.shopofphotos.shopofphotos.domain.photo.*;
 import pl.shopofphotos.shopofphotos.domain.price.Currency;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
@@ -44,15 +44,10 @@ public class ShopofphotosApplication {
             .country(authorCountry)
             .build();
     Person author = new Person("Damian", "Muszka", authorAddress);
-    Photo photo =
-        new Photo.PhotoBuilder()
-            .camera(camera)
-            .resolution(resolution)
-            .placeOfPhoto(placeOfPhoto)
-            .category(category)
-            .price(price)
-            .author(author)
-            .build();
+    PhotoDetails photoDetails= new PhotoDetails(placeOfPhoto, category);
+    PhotoTechnicalDetails photoTechnicalDetails = new PhotoTechnicalDetails(camera, resolution);
+    Photo photo = new Photo(price, author, photoDetails, photoTechnicalDetails);
+    photo = new PhotoFramed(new Frame(), photo);
 
     String buyerStreet = "Rolna";
     String buyerCity = "Warszawa";
