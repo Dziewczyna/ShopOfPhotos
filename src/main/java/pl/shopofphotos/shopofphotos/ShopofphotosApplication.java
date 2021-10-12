@@ -8,9 +8,7 @@ import pl.shopofphotos.shopofphotos.domain.camera.Camera;
 import pl.shopofphotos.shopofphotos.domain.order.MemoryBasedOrderRepository;
 import pl.shopofphotos.shopofphotos.domain.order.OnlineOrderMethod;
 import pl.shopofphotos.shopofphotos.domain.order.OrderRepository;
-import pl.shopofphotos.shopofphotos.domain.person.Address;
-import pl.shopofphotos.shopofphotos.domain.person.Country;
-import pl.shopofphotos.shopofphotos.domain.person.Person;
+import pl.shopofphotos.shopofphotos.domain.person.*;
 import pl.shopofphotos.shopofphotos.domain.photo.*;
 import pl.shopofphotos.shopofphotos.domain.price.Currency;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
@@ -43,8 +41,10 @@ public class ShopofphotosApplication {
             .postalCode(authorPostalCode)
             .country(authorCountry)
             .build();
-    Person author = new Person("Damian", "Muszka", authorAddress);
-    PhotoDetails photoDetails= new PhotoDetails(placeOfPhoto, category);
+    PersonRepository memoryBasedPersonRepository = new MemoryBasedPersonRepository();
+    Person author = memoryBasedPersonRepository.addPerson("Damian", "Muszka", authorAddress);
+
+    PhotoDetails photoDetails = new PhotoDetails(placeOfPhoto, category);
     PhotoTechnicalDetails photoTechnicalDetails = new PhotoTechnicalDetails(camera, resolution);
     Photo photo = new Photo(price, author, photoDetails, photoTechnicalDetails);
     photo = new PhotoFramed(new Frame(), photo);
@@ -62,7 +62,9 @@ public class ShopofphotosApplication {
             .postalCode(buyerPostalCode)
             .country(buyerCountry)
             .build();
-    Person buyer = new Person("Jolanta", "Patka", buyerAddress);
+    Person buyer = memoryBasedPersonRepository.addPerson("Jolanta", "Patka", buyerAddress);
+
+    memoryBasedPersonRepository.readPersons();
 
     List<Photo> photos = new ArrayList<>();
     photos.add(photo);

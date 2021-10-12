@@ -1,8 +1,8 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
 public class PhotoFramed extends Photo {
-  private Frame frame;
   private final Photo photo;
+  private Frame frame;
 
   public PhotoFramed(Frame frame, Photo photo) {
     super(

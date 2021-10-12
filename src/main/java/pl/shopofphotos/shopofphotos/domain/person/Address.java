@@ -20,22 +20,7 @@ public class Address {
 
   @Override
   public String toString() {
-    return "Address{"
-        + "street='"
-        + street
-        + '\''
-        + ", city='"
-        + city
-        + '\''
-        + ", state='"
-        + state
-        + '\''
-        + ", postalCode='"
-        + postalCode
-        + '\''
-        + ", country="
-        + country
-        + '}';
+    return "ul." + street + ", " + city + ", " + state + ", " + postalCode + " " + country;
   }
 
   public static class AddressBuilder {
