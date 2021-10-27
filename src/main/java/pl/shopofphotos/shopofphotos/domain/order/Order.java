@@ -9,6 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 public class Order {
+  public String orderNumber;
   public Person buyer;
   public Person author;
   public List<Photo> photos;
@@ -23,6 +24,8 @@ public class Order {
   @Override
   public String toString() {
     return "Order{"
+        + "\norderNumber="
+        + orderNumber
         + "\nbuyer="
         + buyer
         + ",\nauthor="

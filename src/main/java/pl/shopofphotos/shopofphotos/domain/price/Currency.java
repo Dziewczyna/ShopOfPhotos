@@ -18,6 +18,6 @@ public enum Currency {
 
   @Override
   public String toString() {
-    return "Currency{" + "currency='" + currency + '\'' + '}';
+    return "" + currency + '\'';
   }
 }

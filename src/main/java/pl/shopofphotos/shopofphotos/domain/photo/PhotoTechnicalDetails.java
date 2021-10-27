@@ -11,4 +11,9 @@ public class PhotoTechnicalDetails {
     this.camera = camera;
     this.resolution = resolution;
   }
+
+  @Override
+  public String toString() {
+    return "PhotoTechnicalDetails{" + "camera=" + camera + ", resolution=" + resolution + '}';
+  }
 }

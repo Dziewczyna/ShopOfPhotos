@@ -8,6 +8,6 @@ public class PlaceOfPhoto {
 
   @Override
   public String toString() {
-    return "PlaceOfPhoto{" + "city='" + city + '\'' + '}';
+    return "PlaceOfPhoto: " + city;
   }
 }

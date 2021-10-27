@@ -15,6 +15,6 @@ public enum Resolution {
 
   @Override
   public String toString() {
-    return "Resolution{" + "resolution='" + resolution + '\'' + '}';
+    return resolution;
   }
 }

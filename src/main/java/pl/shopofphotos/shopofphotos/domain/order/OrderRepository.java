@@ -7,7 +7,7 @@ import pl.shopofphotos.shopofphotos.domain.price.Price;
 import java.util.List;
 
 public interface OrderRepository {
-  int placeOrder(
+  String placeOrder(
       Person buyer, Person author, List<Photo> photos, Price price, OrderMethod orderMethod);
 
   Photo editPhoto(Photo photo);

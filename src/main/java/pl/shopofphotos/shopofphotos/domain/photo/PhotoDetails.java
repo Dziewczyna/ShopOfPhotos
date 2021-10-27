@@ -11,4 +11,9 @@ public class PhotoDetails {
     this.placeOfPhoto = placeOfPhoto;
     this.category = category;
   }
+
+  @Override
+  public String toString() {
+    return "PhotoDetails{" + "placeOfPhoto=" + placeOfPhoto + ", category=" + category + '}';
+  }
 }

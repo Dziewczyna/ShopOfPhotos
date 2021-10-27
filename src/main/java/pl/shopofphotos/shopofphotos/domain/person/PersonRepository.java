@@ -7,5 +7,5 @@ public interface PersonRepository {
 
   Person editPerson(String firstName, String lastName, String address);
 
-  void deletePerson(String firstName, String lastName, String address);
+  void deletePerson(String firstName, String lastName, Address address);
 }

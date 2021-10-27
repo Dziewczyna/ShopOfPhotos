@@ -1,11 +1,10 @@
 package pl.shopofphotos.shopofphotos;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.shopofphotos.shopofphotos.domain.Category;
 import pl.shopofphotos.shopofphotos.domain.PlaceOfPhoto;
 import pl.shopofphotos.shopofphotos.domain.camera.Camera;
-import pl.shopofphotos.shopofphotos.domain.order.MemoryBasedOrderRepository;
+import pl.shopofphotos.shopofphotos.domain.order.FileBasedOrderRepository;
 import pl.shopofphotos.shopofphotos.domain.order.OnlineOrderMethod;
 import pl.shopofphotos.shopofphotos.domain.order.OrderRepository;
 import pl.shopofphotos.shopofphotos.domain.person.*;
@@ -41,7 +40,7 @@ public class ShopofphotosApplication {
             .postalCode(authorPostalCode)
             .country(authorCountry)
             .build();
-    PersonRepository memoryBasedPersonRepository = new MemoryBasedPersonRepository();
+    PersonRepository memoryBasedPersonRepository = new FileBasedPersonRepository();
     Person author = memoryBasedPersonRepository.addPerson("Damian", "Muszka", authorAddress);
 
     PhotoDetails photoDetails = new PhotoDetails(placeOfPhoto, category);
@@ -71,13 +70,17 @@ public class ShopofphotosApplication {
     Price priceOfOrder = new Price(new BigDecimal("123.00"), Currency.PLN);
     OnlineOrderMethod orderMethod = new OnlineOrderMethod();
 
-    OrderRepository memoryBasedOrderRepository = new MemoryBasedOrderRepository();
-    int placedOrderId =
-        memoryBasedOrderRepository.placeOrder(buyer, author, photos, priceOfOrder, orderMethod);
-    memoryBasedOrderRepository.readOrder(placedOrderId);
+    PhotoRepository fileBasedPhotoRepository = new FileBasedPhotoRepository();
+    fileBasedPhotoRepository.addPhoto(price, author, photoDetails, photoTechnicalDetails);
 
-    memoryBasedOrderRepository.deleteOrder(placedOrderId);
+    OrderRepository fileBasedOrderRepository = new FileBasedOrderRepository();
+    String placedOrderId =
+        fileBasedOrderRepository.placeOrder(buyer, author, photos, priceOfOrder, orderMethod);
 
-    SpringApplication.run(ShopofphotosApplication.class, args);
+    //    fileBasedOrderRepository.readOrder(placedOrderId);
+    //
+    //    fileBasedOrderRepository.deleteOrder(placedOrderId);
+    //
+    //    SpringApplication.run(ShopofphotosApplication.class, args);
   }
 }
