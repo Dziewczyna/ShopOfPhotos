@@ -1,5 +1,6 @@
 package pl.shopofphotos.shopofphotos;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.shopofphotos.shopofphotos.domain.Category;
 import pl.shopofphotos.shopofphotos.domain.PlaceOfPhoto;
@@ -7,7 +8,10 @@ import pl.shopofphotos.shopofphotos.domain.camera.Camera;
 import pl.shopofphotos.shopofphotos.domain.order.FileBasedOrderRepository;
 import pl.shopofphotos.shopofphotos.domain.order.OnlineOrderMethod;
 import pl.shopofphotos.shopofphotos.domain.order.OrderRepository;
-import pl.shopofphotos.shopofphotos.domain.person.*;
+import pl.shopofphotos.shopofphotos.domain.person.Address;
+import pl.shopofphotos.shopofphotos.domain.person.Country;
+import pl.shopofphotos.shopofphotos.domain.person.FileBasedPersonRepository;
+import pl.shopofphotos.shopofphotos.domain.person.PersonRepository;
 import pl.shopofphotos.shopofphotos.domain.photo.*;
 import pl.shopofphotos.shopofphotos.domain.price.Currency;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
@@ -40,12 +44,13 @@ public class ShopofphotosApplication {
             .postalCode(authorPostalCode)
             .country(authorCountry)
             .build();
-    PersonRepository memoryBasedPersonRepository = new FileBasedPersonRepository();
-    Person author = memoryBasedPersonRepository.addPerson("Damian", "Muszka", authorAddress);
+    PersonRepository fileBasedPersonRepository = new FileBasedPersonRepository();
+    String authorNumber = fileBasedPersonRepository.addPerson("Damian", "Muszka", authorAddress);
 
     PhotoDetails photoDetails = new PhotoDetails(placeOfPhoto, category);
     PhotoTechnicalDetails photoTechnicalDetails = new PhotoTechnicalDetails(camera, resolution);
-    Photo photo = new Photo(price, author, photoDetails, photoTechnicalDetails);
+
+    Photo photo = new Photo(price, authorNumber, photoDetails, photoTechnicalDetails);
     photo = new PhotoFramed(new Frame(), photo);
 
     String buyerStreet = "Rolna";
@@ -61,9 +66,9 @@ public class ShopofphotosApplication {
             .postalCode(buyerPostalCode)
             .country(buyerCountry)
             .build();
-    Person buyer = memoryBasedPersonRepository.addPerson("Jolanta", "Patka", buyerAddress);
+    String buyerNumber = fileBasedPersonRepository.addPerson("Jolanta", "Patka", buyerAddress);
 
-    memoryBasedPersonRepository.readPersons();
+    fileBasedPersonRepository.readPersons();
 
     List<Photo> photos = new ArrayList<>();
     photos.add(photo);
@@ -71,16 +76,17 @@ public class ShopofphotosApplication {
     OnlineOrderMethod orderMethod = new OnlineOrderMethod();
 
     PhotoRepository fileBasedPhotoRepository = new FileBasedPhotoRepository();
-    fileBasedPhotoRepository.addPhoto(price, author, photoDetails, photoTechnicalDetails);
+    fileBasedPhotoRepository.addPhoto(price, authorNumber, photoDetails, photoTechnicalDetails);
 
     OrderRepository fileBasedOrderRepository = new FileBasedOrderRepository();
     String placedOrderId =
-        fileBasedOrderRepository.placeOrder(buyer, author, photos, priceOfOrder, orderMethod);
+        fileBasedOrderRepository.placeOrder(
+            buyerNumber, authorNumber, photos, priceOfOrder, orderMethod);
 
-    //    fileBasedOrderRepository.readOrder(placedOrderId);
-    //
-    //    fileBasedOrderRepository.deleteOrder(placedOrderId);
-    //
-    //    SpringApplication.run(ShopofphotosApplication.class, args);
+    fileBasedOrderRepository.readOrder(placedOrderId);
+
+    fileBasedOrderRepository.deleteOrder(placedOrderId);
+
+//    SpringApplication.run(ShopofphotosApplication.class, args);
   }
 }
