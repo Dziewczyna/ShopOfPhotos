@@ -9,7 +9,7 @@ public class DimensionedPhoto extends Photo {
   public DimensionedPhoto(Dimension dimension, Photo photo) {
     super(
         photo.getPrice(),
-        photo.getAuthor(),
+        photo.getAuthorNumber(),
         photo.getPhotoDetails(),
         photo.getPhotoTechnicalDetails());
     this.dimension = dimension;

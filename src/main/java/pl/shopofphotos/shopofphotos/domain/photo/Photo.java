@@ -1,21 +1,20 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
-import pl.shopofphotos.shopofphotos.domain.person.Person;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 
 public class Photo {
   private final Price price;
-  private final Person author;
+  private final String authorNumber;
   private final PhotoDetails photoDetails;
   private final PhotoTechnicalDetails photoTechnicalDetails;
 
   public Photo(
       Price price,
-      Person author,
+      String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
     this.price = price;
-    this.author = author;
+    this.authorNumber = authorNumber;
     this.photoDetails = photoDetails;
     this.photoTechnicalDetails = photoTechnicalDetails;
   }
@@ -24,8 +23,8 @@ public class Photo {
     return price;
   }
 
-  public Person getAuthor() {
-    return author;
+  public String getAuthorNumber() {
+    return authorNumber;
   }
 
   public PhotoDetails getPhotoDetails() {
@@ -41,8 +40,8 @@ public class Photo {
     return "Photo{"
         + "price="
         + price
-        + ", author="
-        + author
+        + ", authorNumber="
+        + authorNumber
         + ", photoDetails="
         + photoDetails
         + ", photoTechnicalDetails="

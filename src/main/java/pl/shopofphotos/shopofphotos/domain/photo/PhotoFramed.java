@@ -7,7 +7,7 @@ public class PhotoFramed extends Photo {
   public PhotoFramed(Frame frame, Photo photo) {
     super(
         photo.getPrice(),
-        photo.getAuthor(),
+        photo.getAuthorNumber(),
         photo.getPhotoDetails(),
         photo.getPhotoTechnicalDetails());
     this.frame = frame;

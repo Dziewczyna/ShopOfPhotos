@@ -1,51 +1,60 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
+import pl.shopofphotos.shopofphotos.domain.UuidRepository;
 import pl.shopofphotos.shopofphotos.domain.order.Order;
-import pl.shopofphotos.shopofphotos.domain.person.Person;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.String.format;
+
 public class FileBasedPhotoRepository implements PhotoRepository {
-  public final String PHOTOS_FILE_PATH = "shopofphotos\\src\\main\\resources\\Photos.csv";
+  private static final String NEW_LINE = System.lineSeparator();
+  public final String PHOTOS_FILE_PATH = "shopofphotos\\csvfiles\\Photos.csv";
   private final List<Order> photos = new ArrayList<>();
 
   @Override
-  public boolean addPhoto(
+  public String addPhoto(
       Price price,
-      Person author,
+      String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
-    Photo photo = new Photo(price, author, photoDetails, photoTechnicalDetails);
+    UuidRepository uuid = new UuidRepository();
+    String photoNumber = uuid.getId();
+    Photo photo = new Photo(price, authorNumber, photoDetails, photoTechnicalDetails);
     try {
-      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PHOTOS_FILE_PATH, true));
-      bufferedWriter.write(formatDataToFile(price, author, photoDetails, photoTechnicalDetails));
-      System.out.println("Photo added to the file");
-      bufferedWriter.close();
-      return true;
+      Path pathToFile = Paths.get(PHOTOS_FILE_PATH);
+      Files.writeString(
+          pathToFile,
+          formatDataToFile(photoNumber, price, authorNumber, photoDetails, photoTechnicalDetails),
+          StandardOpenOption.CREATE,
+          StandardOpenOption.APPEND);
+      System.out.printf("Photo with number %s added to the file%n", photoNumber);
     } catch (IOException e) {
       e.printStackTrace();
-      return false;
     }
+    return photoNumber;
   }
 
-  private String formatDataToFile(
+  private StringBuilder formatDataToFile(
+      String photoNumber,
       Price price,
-      Person author,
+      String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
-    return "\n"
-        + price.toString()
-        + ";"
-        + author.toString()
-        + ";"
-        + photoDetails.toString()
-        + ";"
-        + photoTechnicalDetails.toString();
+    return new StringBuilder()
+        .append(photoNumber)
+        .append(price)
+        .append(authorNumber)
+        .append(photoDetails)
+        .append(photoTechnicalDetails)
+        .append(NEW_LINE);
   }
 
   @Override

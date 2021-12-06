@@ -1,13 +1,12 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
 import pl.shopofphotos.shopofphotos.domain.order.Order;
-import pl.shopofphotos.shopofphotos.domain.person.Person;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 
 public interface PhotoRepository {
-  boolean addPhoto(
+  String addPhoto(
       Price price,
-      Person author,
+      String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails);
 
