@@ -1,7 +1,7 @@
 package pl.shopofphotos.shopofphotos.domain.person;
 
 public interface PersonRepository {
-  Person addPerson(String firstName, String lastName, Address address);
+  String addPerson(String firstName, String lastName, Address address);
 
   void readPersons();
 

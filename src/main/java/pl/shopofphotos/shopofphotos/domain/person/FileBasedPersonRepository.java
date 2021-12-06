@@ -1,24 +1,38 @@
 package pl.shopofphotos.shopofphotos.domain.person;
 
-import java.io.*;
+import pl.shopofphotos.shopofphotos.domain.UuidRepository;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashSet;
 
 import static java.lang.String.format;
 
 public class FileBasedPersonRepository implements PersonRepository {
-  public final String PERSONS_FILE_PATH = "shopofphotos\\src\\main\\resources\\Persons.csv";
+  private static final String NEW_LINE = System.lineSeparator();
+  public final String PERSONS_FILE_PATH = "shopofphotos\\csvfiles\\Persons.csv";
 
   @Override
-  public Person addPerson(String firstName, String lastName, Address address) {
+  public String addPerson(String firstName, String lastName, Address address) {
+    UuidRepository uuid = new UuidRepository();
+    String personNumber = uuid.getId();
     try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter(PERSONS_FILE_PATH, true));
-      writer.write(formatDataToFile(firstName, lastName, address));
-      System.out.println(format("%s %s added to the file", firstName, lastName));
-      writer.close();
+      Path pathToFile = Paths.get(PERSONS_FILE_PATH);
+      Files.writeString(
+          pathToFile,
+          formatDataToFile(personNumber, firstName, lastName, address),
+          StandardOpenOption.CREATE,
+          StandardOpenOption.APPEND);
+      System.out.printf("%s %s added to the file%n", firstName, lastName);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return new Person(firstName, lastName, address);
+    return personNumber;
   }
 
   @Override
@@ -34,8 +48,29 @@ public class FileBasedPersonRepository implements PersonRepository {
     }
   }
 
-  private String formatDataToFile(String firstName, String lastName, Address address) {
-    return "\n" + firstName + ";" + lastName + ";" + address.toString();
+  public String readPerson(String personNumber) {
+    String person = "";
+    try {
+      person =
+          Files.lines(Paths.get(PERSONS_FILE_PATH))
+              .filter(u -> u.startsWith(personNumber))
+              .toString();
+      System.out.printf("Person with %s found in file%n", personNumber);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return person;
+  }
+
+  private StringBuilder formatDataToFile(
+      String personNumber, String firstName, String lastName, Address address) {
+    return new StringBuilder()
+        .append(personNumber)
+        .append(firstName)
+        .append(lastName)
+        .append(address)
+        .append(NEW_LINE);
   }
 
   @Override
@@ -45,7 +80,7 @@ public class FileBasedPersonRepository implements PersonRepository {
 
   @Override
   public void deletePerson(String firstName, String lastName, Address address) {
-    String personToSearchFormatted = formatDataToFile(firstName, lastName, address);
+    //    String personToSearchFormatted = formatDataToFile(firstName, lastName, address);
     try {
       BufferedReader reader = new BufferedReader(new FileReader(PERSONS_FILE_PATH));
       String line2 = reader.readLine();
