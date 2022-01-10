@@ -1,12 +1,12 @@
 package pl.shopofphotos.shopofphotos;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.shopofphotos.shopofphotos.domain.Category;
 import pl.shopofphotos.shopofphotos.domain.PlaceOfPhoto;
 import pl.shopofphotos.shopofphotos.domain.camera.Camera;
 import pl.shopofphotos.shopofphotos.domain.order.FileBasedOrderRepository;
 import pl.shopofphotos.shopofphotos.domain.order.OnlineOrderMethod;
+import pl.shopofphotos.shopofphotos.domain.order.OrderMethod;
 import pl.shopofphotos.shopofphotos.domain.order.OrderRepository;
 import pl.shopofphotos.shopofphotos.domain.person.Address;
 import pl.shopofphotos.shopofphotos.domain.person.Country;
@@ -36,7 +36,7 @@ public class ShopofphotosApplication {
     String authorState = "lubelskie";
     String authorPostalCode = "20-714";
     Country authorCountry = Country.PL;
-    Address authorAddress =
+    Address authorAddress_1 =
         new Address.AddressBuilder()
             .street(authorStreet)
             .city(authorCity)
@@ -45,13 +45,13 @@ public class ShopofphotosApplication {
             .country(authorCountry)
             .build();
     PersonRepository fileBasedPersonRepository = new FileBasedPersonRepository();
-    String authorNumber = fileBasedPersonRepository.addPerson("Damian", "Muszka", authorAddress);
+    fileBasedPersonRepository.addPerson("Damian", "Muszka", authorAddress_1);
 
     PhotoDetails photoDetails = new PhotoDetails(placeOfPhoto, category);
     PhotoTechnicalDetails photoTechnicalDetails = new PhotoTechnicalDetails(camera, resolution);
 
-    Photo photo = new Photo(price, authorNumber, photoDetails, photoTechnicalDetails);
-    photo = new PhotoFramed(new Frame(), photo);
+    //    Photo photo = new Photo(price, authorNumber, photoDetails, photoTechnicalDetails);
+    //    photo = new PhotoFramed(new Frame(), photo);
 
     String buyerStreet = "Rolna";
     String buyerCity = "Warszawa";
@@ -66,27 +66,40 @@ public class ShopofphotosApplication {
             .postalCode(buyerPostalCode)
             .country(buyerCountry)
             .build();
-    String buyerNumber = fileBasedPersonRepository.addPerson("Jolanta", "Patka", buyerAddress);
+    fileBasedPersonRepository.addPerson("Jolanta", "Panek", buyerAddress);
 
     fileBasedPersonRepository.readPersons();
+    String personNumber = fileBasedPersonRepository.getPersonNumber(0);
+    fileBasedPersonRepository.deletePerson("Jolanta", "Panek");
+
+    String authorStreet_2 = "Al. Warszawskie";
+    String authorCity_2 = "Kostrzyn";
+    String authorState_2 = "wielkopolskie";
+    String authorPostalCode_2 = "62-025";
+    Country authorCountry_2 = Country.PL;
+    Address authorAddress_2 =
+        new Address(
+            authorStreet_2, authorCity_2, authorState_2, authorPostalCode_2, authorCountry_2);
+    fileBasedPersonRepository.editPerson("Damian", "Muszka", authorAddress_2);
 
     List<Photo> photos = new ArrayList<>();
-    photos.add(photo);
+    //    photos.add(photo);
     Price priceOfOrder = new Price(new BigDecimal("123.00"), Currency.PLN);
-    OnlineOrderMethod orderMethod = new OnlineOrderMethod();
+    OrderMethod orderMethod = new OnlineOrderMethod();
 
     PhotoRepository fileBasedPhotoRepository = new FileBasedPhotoRepository();
-    fileBasedPhotoRepository.addPhoto(price, authorNumber, photoDetails, photoTechnicalDetails);
+        fileBasedPhotoRepository.addPhoto(price, personNumber, photoDetails,
+     photoTechnicalDetails);
 
     OrderRepository fileBasedOrderRepository = new FileBasedOrderRepository();
-    String placedOrderId =
-        fileBasedOrderRepository.placeOrder(
-            buyerNumber, authorNumber, photos, priceOfOrder, orderMethod);
+    //    String placedOrderId =
+    //        fileBasedOrderRepository.placeOrder(
+    //            buyerNumber, authorNumber, photos, priceOfOrder, orderMethod);
 
-    fileBasedOrderRepository.readOrder(placedOrderId);
+    //    fileBasedOrderRepository.readOrder(placedOrderId);
+    //
+    //    fileBasedOrderRepository.deleteOrder(placedOrderId);
 
-    fileBasedOrderRepository.deleteOrder(placedOrderId);
-
-//    SpringApplication.run(ShopofphotosApplication.class, args);
+    //    SpringApplication.run(ShopofphotosApplication.class, args);
   }
 }

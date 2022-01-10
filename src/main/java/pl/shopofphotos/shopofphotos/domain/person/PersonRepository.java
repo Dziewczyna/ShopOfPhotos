@@ -1,11 +1,15 @@
 package pl.shopofphotos.shopofphotos.domain.person;
 
 public interface PersonRepository {
-  String addPerson(String firstName, String lastName, Address address);
+  void addPerson(String firstName, String lastName, Address address);
 
   void readPersons();
 
-  Person editPerson(String firstName, String lastName, String address);
+  String getPersonNumber(int i);
 
-  void deletePerson(String firstName, String lastName, Address address);
+  String readPerson(String firstName, String lstName);
+
+  Person editPerson(String firstName, String lastName, Address address);
+
+  void deletePerson(String firstName, String lastName);
 }

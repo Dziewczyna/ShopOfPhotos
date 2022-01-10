@@ -2,23 +2,21 @@ package pl.shopofphotos.shopofphotos.domain.person;
 
 import pl.shopofphotos.shopofphotos.domain.UuidRepository;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.HashSet;
-
-import static java.lang.String.format;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileBasedPersonRepository implements PersonRepository {
   private static final String NEW_LINE = System.lineSeparator();
   public final String PERSONS_FILE_PATH = "shopofphotos\\csvfiles\\Persons.csv";
 
   @Override
-  public String addPerson(String firstName, String lastName, Address address) {
+  public void addPerson(String firstName, String lastName, Address address) {
     UuidRepository uuid = new UuidRepository();
     String personNumber = uuid.getId();
     try {
@@ -32,69 +30,82 @@ public class FileBasedPersonRepository implements PersonRepository {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return personNumber;
   }
 
   @Override
   public void readPersons() {
-    try {
-      BufferedReader reader = new BufferedReader(new FileReader(PERSONS_FILE_PATH));
-      String currentLine = reader.readLine();
-      System.out.println(currentLine);
-      reader.close();
+    try (Stream<String> stream = Files.lines(Paths.get(PERSONS_FILE_PATH))) {
+      stream.forEach(System.out::println);
 
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  public String readPerson(String personNumber) {
+  @Override
+  public String getPersonNumber(int i) {
+    String extractedLine;
+    String personNumber = "";
+    try {
+      extractedLine = Files.readAllLines(Paths.get(PERSONS_FILE_PATH)).get(i);
+      personNumber = extractedLine.substring(0, extractedLine.indexOf(";"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return personNumber;
+  }
+
+
+  private String findPersonByName(String firstName, String lastName) {
     String person = "";
     try {
       person =
-          Files.lines(Paths.get(PERSONS_FILE_PATH))
-              .filter(u -> u.startsWith(personNumber))
-              .toString();
-      System.out.printf("Person with %s found in file%n", personNumber);
-
+              Files.lines(Paths.get(PERSONS_FILE_PATH))
+                      .filter(u -> u.contains(firstName) & u.contains(lastName))
+                      .toString();
     } catch (IOException e) {
       e.printStackTrace();
     }
     return person;
   }
 
+  @Override
+  public String readPerson(String firstName, String lastName) {
+    return findPersonByName(firstName,lastName);
+  }
+
   private StringBuilder formatDataToFile(
       String personNumber, String firstName, String lastName, Address address) {
     return new StringBuilder()
         .append(personNumber)
+        .append("; ")
         .append(firstName)
+        .append("; ")
         .append(lastName)
+        .append("; ")
         .append(address)
         .append(NEW_LINE);
   }
 
+
   @Override
-  public Person editPerson(String firstName, String lastName, String address) {
+  public Person editPerson(String firstName, String lastName, Address address) {
+    deletePerson(firstName, lastName);
+    addPerson(firstName, lastName, address);
     return null;
   }
 
   @Override
-  public void deletePerson(String firstName, String lastName, Address address) {
-    //    String personToSearchFormatted = formatDataToFile(firstName, lastName, address);
+  public void deletePerson(String firstName, String lastName) {
+    Path pathToFile = Paths.get(PERSONS_FILE_PATH);
     try {
-      BufferedReader reader = new BufferedReader(new FileReader(PERSONS_FILE_PATH));
-      String line2 = reader.readLine();
-
-      // hashset for storing lines of file
-      HashSet<String> hs = new HashSet<>();
-
-      // loop for each line of file
-      while (line2 != null) {
-        hs.add(line2);
-
-        line2 = reader.readLine();
-      }
-
+      List<String> out =
+          Files.lines(pathToFile)
+              .filter(line -> !line.contains(firstName) & !line.contains(lastName))
+              .collect(Collectors.toList());
+      Files.write(pathToFile, out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+      System.out.println(firstName + " " + lastName + " deleted");
     } catch (IOException e) {
       e.printStackTrace();
     }
