@@ -6,7 +6,7 @@ import pl.shopofphotos.shopofphotos.domain.price.Price;
 import java.util.List;
 
 public interface OrderRepository {
-  String placeOrder(
+  void placeOrder(
       String buyerNumber,
       String authorNumber,
       List<Photo> photos,
@@ -15,9 +15,9 @@ public interface OrderRepository {
 
   Photo editPhoto(Photo photo);
 
-  Price changePrice(Price price);
+  Price changePrice(String orderNumber, Price price);
 
-  Order readOrder(String orderId);
+  String readOrder(String orderNumber);
 
-  void deleteOrder(String orderId);
+  void deleteOrder(String orderNumber);
 }

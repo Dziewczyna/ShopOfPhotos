@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileBasedOrderRepository implements OrderRepository {
   private static final String NEW_LINE = System.lineSeparator();
@@ -18,7 +19,7 @@ public class FileBasedOrderRepository implements OrderRepository {
   private final List<Order> orders = new ArrayList<>();
 
   @Override
-  public String placeOrder(
+  public void placeOrder(
       String buyerNumber,
       String authorNumber,
       List<Photo> photos,
@@ -40,7 +41,6 @@ public class FileBasedOrderRepository implements OrderRepository {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return orderNumber;
   }
 
   private StringBuilder formatDataToFile(
@@ -51,33 +51,72 @@ public class FileBasedOrderRepository implements OrderRepository {
       OrderMethod orderMethod) {
     return new StringBuilder()
         .append(buyerNumber)
+        .append("; ")
         .append(authorNumber)
+        .append("; ")
         .append(photos)
+        .append("; ")
         .append(price)
+        .append("; ")
         .append(orderMethod)
         .append(NEW_LINE);
   }
 
   @Override
   public Photo editPhoto(Photo photo) {
+    String order = findOrderBy(photo.getPhotoTechnicalDetails().toString());
+    String orderNumber = findOrderNumberFromLine(order);
     return null;
   }
 
   @Override
-  public Price changePrice(Price price) {
+  public Price changePrice(String orderNumber, Price price) {
+    String order = findOrderBy(orderNumber);
+    deleteOrder(orderNumber);
+
     return null;
   }
 
-  @Override
-  public Order readOrder(String orderId) {
-    //    System.out.println(orders.get(orderId).toString());
-    //    return orders.get(orderId);
-    return null;
+  private String findOrderBy(String findBy) {
+    String order = "";
+    try {
+      order = Files.lines(Paths.get(ORDERS_FILE_PATH)).filter(u -> u.contains(findBy)).toString();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return order;
+  }
+
+  private String findOrderNumberFromLine(String orderLineFromFile) {
+    String order = "";
+    try {
+      order =
+          Files.lines(Paths.get(ORDERS_FILE_PATH))
+              .filter(u -> u.contains(orderLineFromFile))
+              .toString();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return order;
   }
 
   @Override
-  public void deleteOrder(String orderId) {
-    //    orders.remove(orderId);
-    //    System.out.println("Order with orderId=" + orderId + " removed");
+  public String readOrder(String orderNumber) {
+    return findOrderBy(orderNumber);
+  }
+
+  @Override
+  public void deleteOrder(String orderNumber) {
+    Path pathToFile = Paths.get(ORDERS_FILE_PATH);
+    try {
+      List<String> out =
+          Files.lines(pathToFile)
+              .filter(line -> !line.contains(orderNumber))
+              .collect(Collectors.toList());
+      Files.write(pathToFile, out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+      System.out.println("Order with number" + orderNumber + " deleted");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
