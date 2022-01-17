@@ -56,14 +56,13 @@ public class FileBasedPersonRepository implements PersonRepository {
     return personNumber;
   }
 
-
   private String findPersonByName(String firstName, String lastName) {
     String person = "";
     try {
       person =
-              Files.lines(Paths.get(PERSONS_FILE_PATH))
-                      .filter(u -> u.contains(firstName) & u.contains(lastName))
-                      .toString();
+          Files.lines(Paths.get(PERSONS_FILE_PATH))
+              .filter(u -> u.contains(firstName) & u.contains(lastName))
+              .toString();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -72,7 +71,7 @@ public class FileBasedPersonRepository implements PersonRepository {
 
   @Override
   public String readPerson(String firstName, String lastName) {
-    return findPersonByName(firstName,lastName);
+    return findPersonByName(firstName, lastName);
   }
 
   private StringBuilder formatDataToFile(
@@ -88,12 +87,10 @@ public class FileBasedPersonRepository implements PersonRepository {
         .append(NEW_LINE);
   }
 
-
   @Override
-  public Person editPerson(String firstName, String lastName, Address address) {
+  public void editPerson(String firstName, String lastName, Address address) {
     deletePerson(firstName, lastName);
     addPerson(firstName, lastName, address);
-    return null;
   }
 
   @Override

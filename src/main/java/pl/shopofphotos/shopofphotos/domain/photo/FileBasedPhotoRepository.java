@@ -11,8 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.String.format;
+import java.util.stream.Collectors;
 
 public class FileBasedPhotoRepository implements PhotoRepository {
   private static final String NEW_LINE = System.lineSeparator();
@@ -20,14 +19,13 @@ public class FileBasedPhotoRepository implements PhotoRepository {
   private final List<Order> photos = new ArrayList<>();
 
   @Override
-  public String addPhoto(
+  public void addPhoto(
       Price price,
       String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
     UuidRepository uuid = new UuidRepository();
     String photoNumber = uuid.getId();
-    Photo photo = new Photo(price, authorNumber, photoDetails, photoTechnicalDetails);
     try {
       Path pathToFile = Paths.get(PHOTOS_FILE_PATH);
       Files.writeString(
@@ -39,7 +37,6 @@ public class FileBasedPhotoRepository implements PhotoRepository {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return photoNumber;
   }
 
   private StringBuilder formatDataToFile(
@@ -58,20 +55,49 @@ public class FileBasedPhotoRepository implements PhotoRepository {
   }
 
   @Override
-  public Photo editPhoto(Photo photo) {
-    return null;
+  public void editPhoto(
+      String photoNumber,
+      Price price,
+      String authorNumber,
+      PhotoDetails photoDetails,
+      PhotoTechnicalDetails photoTechnicalDetails) {
+    deletePhoto(photoNumber);
+    addPhoto(price, authorNumber, photoDetails, photoTechnicalDetails);
   }
 
   @Override
-  public Price changePhoto(Price price) {
+  public Price changePriceOfPhoto(String photoNumber, Price price) {
     return null;
   }
 
-  @Override
-  public Order readPhoto(int photoId) {
-    return null;
+  private String findPhotoByNumber(String photoNumber) {
+    String person = "";
+    try {
+      person =
+          Files.lines(Paths.get(PHOTOS_FILE_PATH)).filter(u -> u.contains(photoNumber)).toString();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return person;
   }
 
   @Override
-  public void deletePhoto(int photoId) {}
+  public String readPhoto(String photoNumber) {
+    return findPhotoByNumber(photoNumber);
+  }
+
+  @Override
+  public void deletePhoto(String photoNumber) {
+    Path pathToFile = Paths.get(PHOTOS_FILE_PATH);
+    try {
+      List<String> out =
+          Files.lines(pathToFile)
+              .filter(line -> !line.contains(photoNumber))
+              .collect(Collectors.toList());
+      Files.write(pathToFile, out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+      System.out.println("Photo with id: " + photoNumber + " deleted");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }

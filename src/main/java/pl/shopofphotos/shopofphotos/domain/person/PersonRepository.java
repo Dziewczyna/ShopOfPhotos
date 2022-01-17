@@ -7,9 +7,9 @@ public interface PersonRepository {
 
   String getPersonNumber(int i);
 
-  String readPerson(String firstName, String lstName);
+  String readPerson(String firstName, String lastName);
 
-  Person editPerson(String firstName, String lastName, Address address);
+  void editPerson(String firstName, String lastName, Address address);
 
   void deletePerson(String firstName, String lastName);
 }
