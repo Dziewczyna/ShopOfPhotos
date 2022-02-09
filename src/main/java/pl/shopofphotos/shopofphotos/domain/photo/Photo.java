@@ -1,12 +1,34 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 
+import javax.persistence.*;
+
+@Entity
+@NoArgsConstructor
+@Table(name = "photo")
+@Getter
+@AllArgsConstructor
 public class Photo {
-  private final Price price;
-  private final String authorNumber;
-  private final PhotoDetails photoDetails;
-  private final PhotoTechnicalDetails photoTechnicalDetails;
+  @Id
+  @Column(name = "photo_id")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long photoId;
+
+  @Column(name = "price")
+  private Price price;
+
+  @Column(name = "author_number")
+  private String authorNumber;
+
+  @Column(name = "photo_details")
+  private PhotoDetails photoDetails;
+
+  @Column(name = "photo_technical_details")
+  private PhotoTechnicalDetails photoTechnicalDetails;
 
   public Photo(
       Price price,
@@ -17,22 +39,6 @@ public class Photo {
     this.authorNumber = authorNumber;
     this.photoDetails = photoDetails;
     this.photoTechnicalDetails = photoTechnicalDetails;
-  }
-
-  public Price getPrice() {
-    return price;
-  }
-
-  public String getAuthorNumber() {
-    return authorNumber;
-  }
-
-  public PhotoDetails getPhotoDetails() {
-    return photoDetails;
-  }
-
-  public PhotoTechnicalDetails getPhotoTechnicalDetails() {
-    return photoTechnicalDetails;
   }
 
   @Override

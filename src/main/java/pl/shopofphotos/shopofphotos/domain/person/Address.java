@@ -1,13 +1,33 @@
 package pl.shopofphotos.shopofphotos.domain.person;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @AllArgsConstructor
+@Entity
+@Table(name = "address")
+@NoArgsConstructor
 public class Address {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "address_id")
+  private long address_id;
+
+  @Column(name = "street")
   private String street;
+
+  @Column(name = "city")
   private String city;
+
+  @Column(name = "state")
   private String state;
+
+  @Column(name = "postal_code")
   private String postalCode;
+
+  @Column(name = "country")
   private Country country;
 
   public Address(AddressBuilder addressBuilder) {

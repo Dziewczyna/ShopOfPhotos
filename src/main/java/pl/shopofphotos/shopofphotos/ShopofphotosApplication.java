@@ -25,11 +25,11 @@ import java.util.List;
 public class ShopofphotosApplication {
 
   public static void main(String[] args) {
-    Camera camera = new Camera("Sony", "Cyber-shot DSC-RX10 III");
+//    Camera camera = new Camera("Sony", "Cyber-shot DSC-RX10 III");
     Resolution resolution = Resolution.resolution1205;
     PlaceOfPhoto placeOfPhoto = new PlaceOfPhoto("Lublin");
     Category category = Category.ANIMALS;
-    Price price = new Price(new BigDecimal("123.00"), Currency.PLN);
+//    Price price = new Price(new BigDecimal("123.00"), Currency.PLN);
 
     String authorStreet = "Polna";
     String authorCity = "Lublin";
@@ -48,7 +48,7 @@ public class ShopofphotosApplication {
     fileBasedPersonRepository.addPerson("Damian", "Muszka", authorAddress_1);
 
     PhotoDetails photoDetails = new PhotoDetails(placeOfPhoto, category);
-    PhotoTechnicalDetails photoTechnicalDetails = new PhotoTechnicalDetails(camera, resolution);
+//    PhotoTechnicalDetails photoTechnicalDetails = new PhotoTechnicalDetails(camera, resolution);
 
     //    Photo photo = new Photo(price, authorNumber, photoDetails, photoTechnicalDetails);
     //    photo = new PhotoFramed(new Frame(), photo);
@@ -77,19 +77,19 @@ public class ShopofphotosApplication {
     String authorState_2 = "wielkopolskie";
     String authorPostalCode_2 = "62-025";
     Country authorCountry_2 = Country.PL;
-    Address authorAddress_2 =
-        new Address(
-            authorStreet_2, authorCity_2, authorState_2, authorPostalCode_2, authorCountry_2);
-    fileBasedPersonRepository.editPerson("Damian", "Muszka", authorAddress_2);
+//    Address authorAddress_2 =
+//        new Address(
+//            authorStreet_2, authorCity_2, authorState_2, authorPostalCode_2, authorCountry_2);
+//    fileBasedPersonRepository.editPerson("Damian", "Muszka", authorAddress_2);
 
     List<Photo> photos = new ArrayList<>();
     //    photos.add(photo);
-    Price priceOfOrder = new Price(new BigDecimal("123.00"), Currency.PLN);
+//    Price priceOfOrder = new Price(new BigDecimal("123.00"), Currency.PLN);
     OrderMethod orderMethod = new OnlineOrderMethod();
 
     PhotoRepository fileBasedPhotoRepository = new FileBasedPhotoRepository();
-        fileBasedPhotoRepository.addPhoto(price, personNumber, photoDetails,
-     photoTechnicalDetails);
+//        fileBasedPhotoRepository.addPhoto(price, personNumber, photoDetails,
+//     photoTechnicalDetails);
 
     OrderRepository fileBasedOrderRepository = new FileBasedOrderRepository();
     //    String placedOrderId =

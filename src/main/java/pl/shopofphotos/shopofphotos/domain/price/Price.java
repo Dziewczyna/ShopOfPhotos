@@ -1,12 +1,23 @@
 package pl.shopofphotos.shopofphotos.domain.price;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@AllArgsConstructor
+@Entity
+@Table(name = "price")
 public class Price {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "price_id")
+  private long price_id;
+
+  @Column(name = "price_value")
   private BigDecimal price;
+
+  @Column(name = "currency")
   private Currency currency;
 
   @Override

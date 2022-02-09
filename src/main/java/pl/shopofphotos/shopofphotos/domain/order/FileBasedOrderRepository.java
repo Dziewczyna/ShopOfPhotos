@@ -37,7 +37,7 @@ public class FileBasedOrderRepository implements OrderRepository {
           StandardOpenOption.CREATE,
           StandardOpenOption.APPEND);
 
-      System.out.println("Order with orderId=" + order.orderNumber + " added to the file");
+      System.out.println("Order with orderId=" + order.orderId + " added to the file");
     } catch (IOException e) {
       e.printStackTrace();
     }
