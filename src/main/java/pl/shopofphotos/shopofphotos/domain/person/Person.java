@@ -23,7 +23,7 @@ public class Person {
   @Column(name = "last_name")
   private String lastName;
 
-  @OneToMany(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "address_id", referencedColumnName = "address_id")
   private Address address;
 

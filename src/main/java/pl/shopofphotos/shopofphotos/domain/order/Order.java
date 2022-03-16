@@ -18,11 +18,11 @@ public class Order {
   @Column(name = "order_id")
   public String orderId;
 
-  @ManyToMany(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "buyer_id", referencedColumnName = "person_id")
   public String buyerId;
 
-  @ManyToMany(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "author_id", referencedColumnName = "person_id")
   public String authorId;
 
@@ -30,7 +30,7 @@ public class Order {
   @JoinColumn(name = "photo_id", referencedColumnName = "photo_id")
   public List<Photo> photos;
 
-  @ManyToMany(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "price_id", referencedColumnName = "price_id")
   public Price price;
 

@@ -1,8 +1,5 @@
 package pl.shopofphotos.shopofphotos.domain.price;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 

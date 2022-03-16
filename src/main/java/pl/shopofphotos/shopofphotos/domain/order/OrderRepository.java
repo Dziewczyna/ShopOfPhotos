@@ -1,12 +1,11 @@
 package pl.shopofphotos.shopofphotos.domain.order;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import pl.shopofphotos.shopofphotos.domain.photo.Photo;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 
 import java.util.List;
 
-public interface OrderRepository{
+public interface OrderRepository {
   void placeOrder(
       String buyerNumber,
       String authorNumber,

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileBasedPhotoRepository implements PhotoRepository{
+public class FileBasedPhotoRepository implements PhotoRepository {
   private static final String NEW_LINE = System.lineSeparator();
   public final String PHOTOS_FILE_PATH = "shopofphotos\\csvfiles\\Photos.csv";
   private final List<Order> photos = new ArrayList<>();
