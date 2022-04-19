@@ -13,7 +13,7 @@ import pl.shopofphotos.shopofphotos.domain.person.Country;
 import pl.shopofphotos.shopofphotos.domain.person.FileBasedPersonRepository;
 import pl.shopofphotos.shopofphotos.domain.person.PersonRepository;
 import pl.shopofphotos.shopofphotos.domain.photo.FileBasedPhotoRepository;
-import pl.shopofphotos.shopofphotos.domain.photo.Photo;
+import pl.shopofphotos.shopofphotos.domain.photo.entities.PhotoEntity;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoDetails;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoRepository;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
@@ -83,7 +83,7 @@ public class ShopofphotosApplication {
     //            authorStreet_2, authorCity_2, authorState_2, authorPostalCode_2, authorCountry_2);
     //    fileBasedPersonRepository.editPerson("Damian", "Muszka", authorAddress_2);
 
-    List<Photo> photos = new ArrayList<>();
+    List<PhotoEntity> photos = new ArrayList<>();
     //    photos.add(photo);
     //    Price priceOfOrder = new Price(new BigDecimal("123.00"), Currency.PLN);
     OrderMethod orderMethod = new OnlineOrderMethod();

@@ -1,17 +1,21 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
 import pl.shopofphotos.shopofphotos.domain.dimension.Dimension;
+import pl.shopofphotos.shopofphotos.domain.photo.entities.PhotoEntity;
 
-public class DimensionedPhoto extends Photo {
-  private final Photo photo;
+public class DimensionedPhoto extends PhotoEntity {
+  private final PhotoEntity photo;
   private Dimension dimension;
 
-  public DimensionedPhoto(Dimension dimension, Photo photo) {
+  public DimensionedPhoto(Dimension dimension, PhotoEntity photo) {
     super(
         photo.getPrice(),
         photo.getAuthorNumber(),
         photo.getPhotoDetails(),
-        photo.getPhotoTechnicalDetails());
+        photo.getCamera(),
+        photo.getResolution(),
+        photo.getPlaceOfPhoto(),
+        photo.getCategory());
     this.dimension = dimension;
     this.photo = photo;
   }
