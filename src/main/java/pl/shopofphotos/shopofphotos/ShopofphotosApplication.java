@@ -13,7 +13,7 @@ import pl.shopofphotos.shopofphotos.domain.person.Country;
 import pl.shopofphotos.shopofphotos.domain.person.FileBasedPersonRepository;
 import pl.shopofphotos.shopofphotos.domain.person.PersonRepository;
 import pl.shopofphotos.shopofphotos.domain.photo.FileBasedPhotoRepository;
-import pl.shopofphotos.shopofphotos.domain.photo.entities.PhotoEntity;
+import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoDetails;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoRepository;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;

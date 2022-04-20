@@ -2,7 +2,7 @@ package pl.shopofphotos.shopofphotos.service.photo;
 
 import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.photo.NoPhotoException;
-import pl.shopofphotos.shopofphotos.domain.photo.entities.PhotoEntity;
+import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoJpaRepository;
 
 import java.util.List;

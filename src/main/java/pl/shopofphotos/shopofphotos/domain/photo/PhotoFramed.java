@@ -1,6 +1,6 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
-import pl.shopofphotos.shopofphotos.domain.photo.entities.PhotoEntity;
+import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
 
 public class PhotoFramed extends PhotoEntity {
   private final PhotoEntity photo;

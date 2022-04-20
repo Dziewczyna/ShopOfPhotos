@@ -1,4 +1,4 @@
-package pl.shopofphotos.shopofphotos.domain.photo.entities;
+package pl.shopofphotos.shopofphotos.domain.photo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
