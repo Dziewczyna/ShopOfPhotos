@@ -1,7 +1,8 @@
 package pl.shopofphotos.shopofphotos.domain.order;
 
 import pl.shopofphotos.shopofphotos.domain.UuidRepository;
-import pl.shopofphotos.shopofphotos.domain.photo.Photo;
+import pl.shopofphotos.shopofphotos.domain.order.entity.OrderEntity;
+import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 
 import java.io.IOException;
@@ -16,19 +17,19 @@ import java.util.stream.Collectors;
 public class FileBasedOrderRepository implements OrderRepository {
   private static final String NEW_LINE = System.lineSeparator();
   public final String ORDERS_FILE_PATH = "shopofphotos\\csvfiles\\Orders.csv";
-  private final List<Order> orders = new ArrayList<>();
+  private final List<OrderEntity> orders = new ArrayList<>();
 
   @Override
   public void placeOrder(
       String buyerNumber,
       String authorNumber,
-      List<Photo> photos,
+      List<PhotoEntity> photos,
       Price price,
       OrderMethod orderMethod) {
     UuidRepository uuid = new UuidRepository();
     String orderNumber = uuid.getId();
 
-    Order order = new Order(orderNumber, buyerNumber, authorNumber, photos, price, orderMethod);
+//    Order order = new Order(orderNumber, buyerNumber, authorNumber, photos, price, orderMethod);
     try {
       Path path = Paths.get(ORDERS_FILE_PATH);
       Files.writeString(
@@ -37,7 +38,7 @@ public class FileBasedOrderRepository implements OrderRepository {
           StandardOpenOption.CREATE,
           StandardOpenOption.APPEND);
 
-      System.out.println("Order with orderId=" + order.orderId + " added to the file");
+//      System.out.println("Order with orderId=" + order.orderId + " added to the file");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -46,7 +47,7 @@ public class FileBasedOrderRepository implements OrderRepository {
   private StringBuilder formatDataToFile(
       String buyerNumber,
       String authorNumber,
-      List<Photo> photos,
+      List<PhotoEntity> photos,
       Price price,
       OrderMethod orderMethod) {
     return new StringBuilder()
@@ -63,8 +64,8 @@ public class FileBasedOrderRepository implements OrderRepository {
   }
 
   @Override
-  public Photo editPhoto(Photo photo) {
-    String order = findOrderBy(photo.getPhotoTechnicalDetails().toString());
+  public PhotoEntity editPhoto(PhotoEntity photoEntity) {
+    String order = findOrderBy(photoEntity.getCamera().toString());
     String orderNumber = findOrderNumberFromLine(order);
     return null;
   }
