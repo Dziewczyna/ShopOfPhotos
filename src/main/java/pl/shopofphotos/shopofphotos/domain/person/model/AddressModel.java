@@ -9,20 +9,30 @@ import pl.shopofphotos.shopofphotos.domain.person.Country;
 @AllArgsConstructor
 @Getter
 public class AddressModel {
-    private final String street;
-    private final String city;
-    private final String state;
-    private final String postalCode;
-    private final Country country;
+  private final String street;
+  private final String city;
+  private final String state;
+  private final String postalCode;
+  private final Country country;
 
-    @Override
-    public String toString() {
-        return "AddressModel{" +
-                "street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", country='" + country + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "AddressModel{"
+        + "street='"
+        + street
+        + '\''
+        + ", city='"
+        + city
+        + '\''
+        + ", state='"
+        + state
+        + '\''
+        + ", postalCode='"
+        + postalCode
+        + '\''
+        + ", country='"
+        + country
+        + '\''
+        + '}';
+  }
 }

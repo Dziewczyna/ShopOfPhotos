@@ -29,7 +29,8 @@ public class FileBasedOrderRepository implements OrderRepository {
     UuidRepository uuid = new UuidRepository();
     String orderNumber = uuid.getId();
 
-//    Order order = new Order(orderNumber, buyerNumber, authorNumber, photos, price, orderMethod);
+    //    Order order = new Order(orderNumber, buyerNumber, authorNumber, photos, price,
+    // orderMethod);
     try {
       Path path = Paths.get(ORDERS_FILE_PATH);
       Files.writeString(
@@ -38,7 +39,7 @@ public class FileBasedOrderRepository implements OrderRepository {
           StandardOpenOption.CREATE,
           StandardOpenOption.APPEND);
 
-//      System.out.println("Order with orderId=" + order.orderId + " added to the file");
+      //      System.out.println("Order with orderId=" + order.orderId + " added to the file");
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -65,7 +66,7 @@ public class FileBasedOrderRepository implements OrderRepository {
 
   @Override
   public PhotoEntity editPhoto(PhotoEntity photoEntity) {
-    String order = findOrderBy(photoEntity.getCamera().toString());
+    String order = findOrderBy(photoEntity.getCameraEntity().toString());
     String orderNumber = findOrderNumberFromLine(order);
     return null;
   }

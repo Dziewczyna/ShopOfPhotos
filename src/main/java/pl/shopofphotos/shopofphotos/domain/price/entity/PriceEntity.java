@@ -13,23 +13,27 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 public class PriceEntity {
-    @Id
-    @Column(name = "price_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long priceId;
+  @Id
+  @Column(name = "price_id")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long priceId;
 
-    @Column(name = "price")
-    private String price;
+  @Column(name = "price")
+  private String price;
 
-    @Column(name = "currency")
-    private Currency currency;
+  @Column(name = "currency")
+  private Currency currency;
 
-    @Override
-    public String toString() {
-        return "PriceEntity{" +
-                "priceId=" + priceId +
-                ", price='" + price + '\'' +
-                ", currency=" + currency +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "PriceEntity{"
+        + "priceId="
+        + priceId
+        + ", price='"
+        + price
+        + '\''
+        + ", currency="
+        + currency
+        + '}';
+  }
 }

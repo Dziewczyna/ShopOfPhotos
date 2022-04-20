@@ -16,7 +16,7 @@ public class PhotoSerializator {
             new PhotoDetails(
                 new PlaceOfPhoto(photoEntity.getPlaceOfPhoto()), photoEntity.getCategory()))
         .photoTechnicalDetails(
-            new PhotoTechnicalDetails(photoEntity.getCamera(), photoEntity.getResolution()))
+            new PhotoTechnicalDetails(photoEntity.getCameraEntity(), photoEntity.getResolution()))
         .build();
   }
 }

@@ -11,7 +11,7 @@ public class PhotoFramed extends PhotoEntity {
         photo.getPrice(),
         photo.getAuthorNumber(),
         photo.getPhotoDetails(),
-        photo.getCamera(),
+        photo.getCameraEntity(),
         photo.getResolution(),
         photo.getPlaceOfPhoto(),
         photo.getCategory());

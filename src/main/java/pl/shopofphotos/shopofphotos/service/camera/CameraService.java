@@ -1,7 +1,7 @@
 package pl.shopofphotos.shopofphotos.service.camera;
 
 import org.springframework.stereotype.Service;
-import pl.shopofphotos.shopofphotos.domain.camera.Camera;
+import pl.shopofphotos.shopofphotos.domain.camera.entity.CameraEntity;
 import pl.shopofphotos.shopofphotos.domain.camera.CameraJpaRepository;
 import pl.shopofphotos.shopofphotos.domain.camera.NoCameraException;
 
@@ -12,12 +12,12 @@ import java.util.Optional;
 public class CameraService {
   private CameraJpaRepository cameraJpaRepository;
 
-  public List<Camera> getCameras() {
+  public List<CameraEntity> getCameras() {
     return cameraJpaRepository.findAll();
   }
 
-  public Camera getCamera(String cameraId) {
-    Optional<Camera> camera = cameraJpaRepository.findById(cameraId);
+  public CameraEntity getCamera(String cameraId) {
+    Optional<CameraEntity> camera = cameraJpaRepository.findById(cameraId);
     if (camera.isEmpty()) {
       throw new NoCameraException("No camera with id " + cameraId);
     }

@@ -1,4 +1,4 @@
-package pl.shopofphotos.shopofphotos.domain.camera;
+package pl.shopofphotos.shopofphotos.domain.camera.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +11,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
-public class Camera {
+public class CameraEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "camera_id")
-  private long camera_id;
+  private long cameraId;
 
   @Column(name = "brand")
   private String brand;

@@ -11,14 +11,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 public class PriceModel {
-    private final BigDecimal price;
-    private final Currency currency;
+  private final BigDecimal price;
+  private final Currency currency;
 
-    @Override
-    public String toString() {
-        return "PriceModel{" +
-                "price=" + price +
-                ", currency=" + currency +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "PriceModel{" + "price=" + price + ", currency=" + currency + '}';
+  }
 }
