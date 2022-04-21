@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.shopofphotos.shopofphotos.domain.Category;
-import pl.shopofphotos.shopofphotos.domain.camera.entity.CameraEntity;
+import pl.shopofphotos.shopofphotos.domain.camera.model.CameraModel;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
 
@@ -25,15 +25,15 @@ public class PhotoEntity {
   @JoinColumn(name = "price_id", referencedColumnName = "price_id")
   private Price price;
 
-  @Column(name = "author_number")
-  private String authorNumber;
+  @Column(name = "author_id")
+  private String authorId;
 
   @Column(name = "photo_details")
   private String photoDetails;
 
   @OneToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "camera_id", referencedColumnName = "camera_id")
-  private CameraEntity cameraEntity;
+  private CameraModel cameraModel;
 
   @Column(name = "resolution")
   private Resolution resolution;
@@ -46,16 +46,16 @@ public class PhotoEntity {
 
   public PhotoEntity(
       Price price,
-      String authorNumber,
+      String authorId,
       String photoDetails,
-      CameraEntity cameraEntity,
+      CameraModel cameraModel,
       Resolution resolution,
       String placeOfPhoto,
       Category category) {
     this.price = price;
-    this.authorNumber = authorNumber;
+    this.authorId = authorId;
     this.photoDetails = photoDetails;
-    this.cameraEntity = cameraEntity;
+    this.cameraModel = cameraModel;
     this.resolution = resolution;
     this.placeOfPhoto = placeOfPhoto;
     this.category = category;
@@ -67,11 +67,11 @@ public class PhotoEntity {
         + "price="
         + price
         + ", authorNumber="
-        + authorNumber
+        + authorId
         + ", photoDetails="
         + photoDetails
         + ", photoTechnicalDetails="
-        + cameraEntity
+        + cameraModel
         + '}';
   }
 }

@@ -10,13 +10,13 @@ public class PhotoSerializator {
 
   public static PhotoModel fromEntity(PhotoEntity photoEntity) {
     return PhotoModel.builder()
-        .authorNumber(photoEntity.getAuthorNumber())
+        .authorNumber(photoEntity.getAuthorId())
         .price(photoEntity.getPrice())
         .photoDetails(
             new PhotoDetails(
                 new PlaceOfPhoto(photoEntity.getPlaceOfPhoto()), photoEntity.getCategory()))
         .photoTechnicalDetails(
-            new PhotoTechnicalDetails(photoEntity.getCameraEntity(), photoEntity.getResolution()))
+            new PhotoTechnicalDetails(photoEntity.getCameraModel(), photoEntity.getResolution()))
         .build();
   }
 }

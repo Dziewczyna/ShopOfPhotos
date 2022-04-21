@@ -1,19 +1,19 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
-import pl.shopofphotos.shopofphotos.domain.camera.entity.CameraEntity;
+import pl.shopofphotos.shopofphotos.domain.camera.model.CameraModel;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
 
 public class PhotoTechnicalDetails {
-  private final CameraEntity cameraEntity;
+  private final CameraModel cameraModel;
   private final Resolution resolution;
 
-  public PhotoTechnicalDetails(CameraEntity cameraEntity, Resolution resolution) {
-    this.cameraEntity = cameraEntity;
+  public PhotoTechnicalDetails(CameraModel cameraModel, Resolution resolution) {
+    this.cameraModel = cameraModel;
     this.resolution = resolution;
   }
 
   @Override
   public String toString() {
-    return "PhotoTechnicalDetails{" + "camera=" + cameraEntity + ", resolution=" + resolution + '}';
+    return "PhotoTechnicalDetails{" + "camera=" + cameraModel + ", resolution=" + resolution + '}';
   }
 }

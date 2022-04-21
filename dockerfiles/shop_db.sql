@@ -2,11 +2,29 @@ BEGIN;
 
 CREATE TABLE camera (camera_id SERIAL, brand VARCHAR, model VARCHAR);
 
-CREATE TABLE photo (photo_id SERIAL, authorNumber VARCHAR, PhotoDetails VARCHAR, PhotoTechnicalDetails VARCHAR);
+CREATE TABLE photo (photo_id SERIAL,
+ price_id SERIAL,
+ author_id SERIAL,
+ PhotoDetails VARCHAR,
+ camera_id SERIAL,
+ resolution VARCHAR,
+ place_of_photo VARCHAR,
+ category VARCHAR,
+ PRIMARY KEY(photo_id),
+ CONSTRAINT fk_price FOREIGN KEY (price_id) REFERENCES price(price_id),
+ CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES person(person_id),
+ CONSTRAINT fk_camera FOREIGN KEY (camera_id) REFERENCES camera(camera_id),
+ );
 
-CREATE TABLE address (address_id SERIAL, street VARCHAR, city VARCHAR, state VARCHAR, postal_code VARCHAR, country VARCHAR, PRIMARY KEY(address_id));
+CREATE TABLE address (address_id SERIAL,
+ street VARCHAR,
+ city VARCHAR,
+ state VARCHAR,
+ postal_code VARCHAR,
+ country VARCHAR,
+ PRIMARY KEY(address_id));
 
-CREATE TABLE price (price_id SERIAL, price_value NUMERIC(20,2), currency VARCHAR, PRIMARY KEY(price_id));
+CREATE TABLE price (price_id SERIAL, price NUMERIC(20,2), currency VARCHAR, PRIMARY KEY(price_id));
 
 CREATE TABLE person (person_id SERIAL, first_name VARCHAR, last_name VARCHAR, address_id SERIAL, PRIMARY KEY(person_id), CONSTRAINT fk_address FOREIGN KEY (address_id) REFERENCES address(address_id));
 
