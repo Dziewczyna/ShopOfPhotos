@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 public class FileBasedPersonRepository implements PersonRepository {
   private static final String NEW_LINE = System.lineSeparator();
-  public final String PERSONS_FILE_PATH = "shopofphotos\\csvfiles\\Persons.csv";
+  public final String PERSONS_FILE_PATH = "csvfiles\\Persons.csv";
 
   @Override
   public void addPerson(String firstName, String lastName, Address address) {

@@ -66,7 +66,7 @@ public class FileBasedOrderRepository implements OrderRepository {
 
   @Override
   public PhotoEntity editPhoto(PhotoEntity photoEntity) {
-    String order = findOrderBy(photoEntity.getCameraEntity().toString());
+    String order = findOrderBy(photoEntity.getCameraModel().toString());
     String orderNumber = findOrderNumberFromLine(order);
     return null;
   }
