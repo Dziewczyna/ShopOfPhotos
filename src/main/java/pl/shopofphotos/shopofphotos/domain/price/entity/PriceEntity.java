@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class PriceEntity {
   @Id
   @Column(name = "price_id")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = "hibernate_sequence")
   private long priceId;
 
   @Column(name = "price")
@@ -23,6 +23,11 @@ public class PriceEntity {
 
   @Column(name = "currency")
   private Currency currency;
+
+  public PriceEntity(String price, Currency currency) {
+    this.currency = currency;
+    this.price = price;
+  }
 
   @Override
   public String toString() {

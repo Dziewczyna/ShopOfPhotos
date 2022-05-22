@@ -1,26 +1,35 @@
 package pl.shopofphotos.shopofphotos.service.person;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.person.NoPersonException;
-import pl.shopofphotos.shopofphotos.domain.person.Person;
 import pl.shopofphotos.shopofphotos.domain.person.PersonJpaRepository;
+import pl.shopofphotos.shopofphotos.domain.person.entity.PersonEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PersonService {
-  private PersonJpaRepository personJpaRepository;
+  @Autowired private PersonJpaRepository personJpaRepository;
 
-  public List<Person> getPersons() {
+  public List<PersonEntity> getPersons() {
     return personJpaRepository.findAll();
   }
 
-  public Person getPerson(String personId) {
-    Optional<Person> person = personJpaRepository.findById(personId);
-    if (person.isEmpty()) {
+  public PersonEntity getPerson(String personId) {
+    Optional<PersonEntity> personEntity = personJpaRepository.findById(personId);
+    if (personEntity.isEmpty()) {
       throw new NoPersonException("No person with id " + personId);
     }
-    return person.get();
+    return personEntity.get();
+  }
+
+  public long addPerson(PersonEntity personEntity) {
+    return personJpaRepository.save(personEntity).getPersonId();
+  }
+
+  public void deleteAllPhotos() {
+    personJpaRepository.deleteAll();
   }
 }

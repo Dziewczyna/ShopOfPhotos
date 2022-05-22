@@ -3,17 +3,17 @@ package pl.shopofphotos.shopofphotos.domain.photo.model;
 import lombok.Builder;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoDetails;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoTechnicalDetails;
-import pl.shopofphotos.shopofphotos.domain.price.Price;
+import pl.shopofphotos.shopofphotos.domain.price.model.PriceModel;
 
 @Builder
 public class PhotoModel {
-  private final Price price;
+  private final PriceModel price;
   private final String authorNumber;
   private final PhotoDetails photoDetails;
   private final PhotoTechnicalDetails photoTechnicalDetails;
 
   public PhotoModel(
-      Price price,
+      PriceModel price,
       String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
@@ -23,7 +23,7 @@ public class PhotoModel {
     this.photoTechnicalDetails = photoTechnicalDetails;
   }
 
-  public Price getPrice() {
+  public PriceModel getPrice() {
     return price;
   }
 

@@ -1,26 +1,23 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
 import pl.shopofphotos.shopofphotos.domain.UuidRepository;
-import pl.shopofphotos.shopofphotos.domain.order.Order;
-import pl.shopofphotos.shopofphotos.domain.price.Price;
+import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileBasedPhotoRepository implements PhotoRepository {
   private static final String NEW_LINE = System.lineSeparator();
   public final String PHOTOS_FILE_PATH = "shopofphotos\\csvfiles\\Photos.csv";
-  private final List<Order> photos = new ArrayList<>();
 
   @Override
   public void addPhoto(
-      Price price,
+      PriceEntity price,
       String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
@@ -41,7 +38,7 @@ public class FileBasedPhotoRepository implements PhotoRepository {
 
   private StringBuilder formatDataToFile(
       String photoNumber,
-      Price price,
+      PriceEntity price,
       String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
@@ -57,7 +54,7 @@ public class FileBasedPhotoRepository implements PhotoRepository {
   @Override
   public void editPhoto(
       String photoNumber,
-      Price price,
+      PriceEntity price,
       String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails) {
@@ -66,7 +63,7 @@ public class FileBasedPhotoRepository implements PhotoRepository {
   }
 
   @Override
-  public Price changePriceOfPhoto(String photoNumber, Price price) {
+  public PriceEntity changePriceOfPhoto(String photoNumber, PriceEntity price) {
     return null;
   }
 

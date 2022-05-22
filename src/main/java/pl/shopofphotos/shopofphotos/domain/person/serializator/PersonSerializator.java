@@ -12,7 +12,7 @@ public class PersonSerializator {
         .lastName(personEntity.getLastName())
         .address(
             new Address(
-                personEntity.getAddress(),
+                personEntity.getAddress().getAddressId(),
                 personEntity.getStreet(),
                 personEntity.getCity(),
                 personEntity.getState(),

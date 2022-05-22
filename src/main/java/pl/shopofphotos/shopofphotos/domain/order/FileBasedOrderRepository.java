@@ -2,7 +2,7 @@ package pl.shopofphotos.shopofphotos.domain.order;
 
 import pl.shopofphotos.shopofphotos.domain.UuidRepository;
 import pl.shopofphotos.shopofphotos.domain.order.entity.OrderEntity;
-import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
+import pl.shopofphotos.shopofphotos.domain.photo.Photo;
 import pl.shopofphotos.shopofphotos.domain.price.Price;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class FileBasedOrderRepository implements OrderRepository {
   public void placeOrder(
       String buyerNumber,
       String authorNumber,
-      List<PhotoEntity> photos,
+      List<Photo> photos,
       Price price,
       OrderMethod orderMethod) {
     UuidRepository uuid = new UuidRepository();
@@ -48,7 +48,7 @@ public class FileBasedOrderRepository implements OrderRepository {
   private StringBuilder formatDataToFile(
       String buyerNumber,
       String authorNumber,
-      List<PhotoEntity> photos,
+      List<Photo> photos,
       Price price,
       OrderMethod orderMethod) {
     return new StringBuilder()
@@ -65,8 +65,8 @@ public class FileBasedOrderRepository implements OrderRepository {
   }
 
   @Override
-  public PhotoEntity editPhoto(PhotoEntity photoEntity) {
-    String order = findOrderBy(photoEntity.getCameraModel().toString());
+  public Photo editPhoto(Photo photoEntity) {
+    String order = findOrderBy(photoEntity.getPhotoTechnicalDetails().getCameraModel().toString());
     String orderNumber = findOrderNumberFromLine(order);
     return null;
   }

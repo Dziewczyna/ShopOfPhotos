@@ -9,10 +9,11 @@ public class DimensionedPhoto extends PhotoEntity {
 
   public DimensionedPhoto(Dimension dimension, PhotoEntity photo) {
     super(
+        photo.getPhotoId(),
         photo.getPrice(),
         photo.getAuthorId(),
         photo.getPhotoDetails(),
-        photo.getCameraModel(),
+        photo.getCameraEntity(),
         photo.getResolution(),
         photo.getPlaceOfPhoto(),
         photo.getCategory());

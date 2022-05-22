@@ -1,5 +1,6 @@
 package pl.shopofphotos.shopofphotos.domain.person.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.shopofphotos.shopofphotos.domain.person.Country;
@@ -8,17 +9,18 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "person")
 @Getter
 public class PersonEntity {
   @Id
   @Column(name = "person_id")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long personId;
 
-  @OneToOne(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-  private long address;
+  private AddressEntity address;
 
   @Column(name = "first_name")
   private String firstName;
@@ -40,13 +42,6 @@ public class PersonEntity {
 
   @Column(name = "country")
   private Country country;
-
-  public PersonEntity(long personId, long address, String firstName, String lastName) {
-    this.personId = personId;
-    this.address = address;
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
 
   @Override
   public String toString() {

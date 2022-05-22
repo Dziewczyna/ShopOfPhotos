@@ -8,10 +8,11 @@ public class PhotoFramed extends PhotoEntity {
 
   public PhotoFramed(Frame frame, PhotoEntity photo) {
     super(
+        photo.getPhotoId(),
         photo.getPrice(),
         photo.getAuthorId(),
         photo.getPhotoDetails(),
-        photo.getCameraModel(),
+        photo.getCameraEntity(),
         photo.getResolution(),
         photo.getPlaceOfPhoto(),
         photo.getCategory());

@@ -1,5 +1,6 @@
 package pl.shopofphotos.shopofphotos.domain.person;
 
+import org.springframework.stereotype.Repository;
 import pl.shopofphotos.shopofphotos.domain.UuidRepository;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Repository
 public class FileBasedPersonRepository implements PersonRepository {
   private static final String NEW_LINE = System.lineSeparator();
   public final String PERSONS_FILE_PATH = "csvfiles\\Persons.csv";

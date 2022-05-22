@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import pl.shopofphotos.shopofphotos.domain.order.OrderMethod;
 import pl.shopofphotos.shopofphotos.domain.person.Person;
 import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
-import pl.shopofphotos.shopofphotos.domain.price.Price;
+import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,21 +20,21 @@ public class OrderEntity {
   @Column(name = "order_id")
   public String orderId;
 
-  @OneToOne(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "buyer_id", referencedColumnName = "person_id")
   public Person buyerId;
 
-  @OneToOne(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "author_id", referencedColumnName = "person_id")
   public Person authorId;
 
-  @ManyToMany(cascade = CascadeType.MERGE)
+  @ManyToMany(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "photo_id", referencedColumnName = "photo_id")
   public List<PhotoEntity> photos;
 
-  @OneToOne(cascade = CascadeType.MERGE)
+  @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "price_id", referencedColumnName = "price_id")
-  public Price price;
+  public PriceEntity price;
 
   @Transient private OrderMethod orderMethod;
 

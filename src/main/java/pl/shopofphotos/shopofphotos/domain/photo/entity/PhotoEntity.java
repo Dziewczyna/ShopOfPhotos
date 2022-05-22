@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.shopofphotos.shopofphotos.domain.Category;
-import pl.shopofphotos.shopofphotos.domain.camera.model.CameraModel;
-import pl.shopofphotos.shopofphotos.domain.price.Price;
+import pl.shopofphotos.shopofphotos.domain.camera.entity.CameraEntity;
+import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
 
 import javax.persistence.*;
@@ -18,12 +18,14 @@ import javax.persistence.*;
 public class PhotoEntity {
   @Id
   @Column(name = "photo_id")
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long photoId;
 
-  @OneToOne(cascade = CascadeType.MERGE)
-  @JoinColumn(name = "price_id", referencedColumnName = "price_id")
-  private Price price;
+  @OneToOne(
+      cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
+      fetch = FetchType.EAGER)
+  @JoinColumn(name = "price_id", referencedColumnName = "price_id", insertable = true)
+  private PriceEntity price;
 
   @Column(name = "author_id")
   private String authorId;
@@ -31,9 +33,11 @@ public class PhotoEntity {
   @Column(name = "photo_details")
   private String photoDetails;
 
-  @OneToOne(cascade = CascadeType.MERGE)
+  @OneToOne(
+      cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
+      fetch = FetchType.EAGER)
   @JoinColumn(name = "camera_id", referencedColumnName = "camera_id")
-  private CameraModel cameraModel;
+  private CameraEntity cameraEntity;
 
   @Column(name = "resolution")
   private Resolution resolution;
@@ -45,17 +49,17 @@ public class PhotoEntity {
   private Category category;
 
   public PhotoEntity(
-      Price price,
+      PriceEntity price,
       String authorId,
       String photoDetails,
-      CameraModel cameraModel,
+      CameraEntity cameraEntity,
       Resolution resolution,
       String placeOfPhoto,
       Category category) {
     this.price = price;
     this.authorId = authorId;
     this.photoDetails = photoDetails;
-    this.cameraModel = cameraModel;
+    this.cameraEntity = cameraEntity;
     this.resolution = resolution;
     this.placeOfPhoto = placeOfPhoto;
     this.category = category;
@@ -71,7 +75,7 @@ public class PhotoEntity {
         + ", photoDetails="
         + photoDetails
         + ", photoTechnicalDetails="
-        + cameraModel
+        + cameraEntity
         + '}';
   }
 }

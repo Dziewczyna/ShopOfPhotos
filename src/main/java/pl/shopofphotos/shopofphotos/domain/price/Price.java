@@ -1,20 +1,13 @@
 package pl.shopofphotos.shopofphotos.domain.price;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "price")
+@AllArgsConstructor
 public class Price {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "price_id")
-  private long price_id;
-
-  @Column(name = "price_value")
+  private long priceId;
   private BigDecimal price;
-
-  @Column(name = "currency")
   private Currency currency;
 
   @Override

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class CameraEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = "hibernate_sequence")
   @Column(name = "camera_id")
   private long cameraId;
 
@@ -22,6 +22,11 @@ public class CameraEntity {
 
   @Column(name = "model")
   private String model;
+
+  public CameraEntity(String brand, String model) {
+    this.brand = brand;
+    this.model = model;
+  }
 
   @Override
   public String toString() {

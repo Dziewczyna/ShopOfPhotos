@@ -1,22 +1,22 @@
 package pl.shopofphotos.shopofphotos.domain.photo;
 
-import pl.shopofphotos.shopofphotos.domain.price.Price;
+import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 
 public interface PhotoRepository {
   void addPhoto(
-      Price price,
+      PriceEntity price,
       String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails);
 
   void editPhoto(
       String photoNumber,
-      Price price,
+      PriceEntity price,
       String authorNumber,
       PhotoDetails photoDetails,
       PhotoTechnicalDetails photoTechnicalDetails);
 
-  Price changePriceOfPhoto(String photoNumber, Price price);
+  PriceEntity changePriceOfPhoto(String photoNumber, PriceEntity price);
 
   String readPhoto(String photoNumber);
 
