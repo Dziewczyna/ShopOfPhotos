@@ -2,6 +2,7 @@ package pl.shopofphotos.shopofphotos.domain.person;
 
 import org.springframework.stereotype.Repository;
 import pl.shopofphotos.shopofphotos.domain.UuidRepository;
+import pl.shopofphotos.shopofphotos.domain.address.Address;
 
 import java.io.IOException;
 import java.nio.file.Files;

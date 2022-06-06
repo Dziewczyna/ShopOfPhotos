@@ -1,7 +1,7 @@
-package pl.shopofphotos.shopofphotos.domain.person.serializator;
+package pl.shopofphotos.shopofphotos.domain.address.serializator;
 
-import pl.shopofphotos.shopofphotos.domain.person.entity.AddressEntity;
-import pl.shopofphotos.shopofphotos.domain.person.model.AddressModel;
+import pl.shopofphotos.shopofphotos.domain.address.entity.AddressEntity;
+import pl.shopofphotos.shopofphotos.domain.address.model.AddressModel;
 
 public class AddressSerializator {
 

@@ -3,7 +3,7 @@ package pl.shopofphotos.shopofphotos.domain.person.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.shopofphotos.shopofphotos.domain.person.Country;
+import pl.shopofphotos.shopofphotos.domain.address.entity.AddressEntity;
 
 import javax.persistence.*;
 
@@ -27,21 +27,6 @@ public class PersonEntity {
 
   @Column(name = "last_name")
   private String lastName;
-
-  @Column(name = "street")
-  private String street;
-
-  @Column(name = "city")
-  private String city;
-
-  @Column(name = "state")
-  private String state;
-
-  @Column(name = "postal_code")
-  private String postalCode;
-
-  @Column(name = "country")
-  private Country country;
 
   @Override
   public String toString() {

@@ -1,6 +1,6 @@
 package pl.shopofphotos.shopofphotos.domain.person.serializator;
 
-import pl.shopofphotos.shopofphotos.domain.person.Address;
+import pl.shopofphotos.shopofphotos.domain.address.Address;
 import pl.shopofphotos.shopofphotos.domain.person.entity.PersonEntity;
 import pl.shopofphotos.shopofphotos.domain.person.model.PersonModel;
 
@@ -13,11 +13,11 @@ public class PersonSerializator {
         .address(
             new Address(
                 personEntity.getAddress().getAddressId(),
-                personEntity.getStreet(),
-                personEntity.getCity(),
-                personEntity.getState(),
-                personEntity.getPostalCode(),
-                personEntity.getCountry()))
+                personEntity.getAddress().getStreet(),
+                personEntity.getAddress().getCity(),
+                personEntity.getAddress().getState(),
+                personEntity.getAddress().getPostalCode(),
+                personEntity.getAddress().getCountry()))
         .build();
   }
 }

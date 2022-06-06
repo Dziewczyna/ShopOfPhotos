@@ -1,7 +1,7 @@
 package pl.shopofphotos.shopofphotos.domain.person.model;
 
 import lombok.Builder;
-import pl.shopofphotos.shopofphotos.domain.person.Address;
+import pl.shopofphotos.shopofphotos.domain.address.Address;
 
 @Builder
 public class PersonModel {

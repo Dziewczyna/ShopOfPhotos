@@ -1,9 +1,10 @@
 package pl.shopofphotos.shopofphotos.domain.order.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.shopofphotos.shopofphotos.domain.order.OrderMethod;
-import pl.shopofphotos.shopofphotos.domain.person.Person;
+import pl.shopofphotos.shopofphotos.domain.person.entity.PersonEntity;
 import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
 import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 
@@ -14,19 +15,20 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "order")
+@Getter
 public class OrderEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "order_id")
-  public String orderId;
+  public long orderId;
 
   @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "buyer_id", referencedColumnName = "person_id")
-  public Person buyerId;
+  public PersonEntity buyerId;
 
   @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "author_id", referencedColumnName = "person_id")
-  public Person authorId;
+  public PersonEntity authorId;
 
   @ManyToMany(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "photo_id", referencedColumnName = "photo_id")

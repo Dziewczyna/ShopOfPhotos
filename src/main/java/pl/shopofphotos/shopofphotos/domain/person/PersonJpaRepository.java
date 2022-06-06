@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository;
 import pl.shopofphotos.shopofphotos.domain.person.entity.PersonEntity;
 
 @Repository
-public interface PersonJpaRepository extends JpaRepository<PersonEntity, String> {}
+public interface PersonJpaRepository extends JpaRepository<PersonEntity, Long> {}

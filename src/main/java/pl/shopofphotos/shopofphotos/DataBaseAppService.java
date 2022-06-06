@@ -4,20 +4,43 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.Category;
+import pl.shopofphotos.shopofphotos.domain.address.Country;
+import pl.shopofphotos.shopofphotos.domain.address.entity.AddressEntity;
 import pl.shopofphotos.shopofphotos.domain.camera.entity.CameraEntity;
+import pl.shopofphotos.shopofphotos.domain.order.OnlineOrderMethod;
+import pl.shopofphotos.shopofphotos.domain.order.entity.OrderEntity;
+import pl.shopofphotos.shopofphotos.domain.person.entity.PersonEntity;
 import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
 import pl.shopofphotos.shopofphotos.domain.price.Currency;
 import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
+import pl.shopofphotos.shopofphotos.service.address.AddressService;
+import pl.shopofphotos.shopofphotos.service.camera.CameraService;
+import pl.shopofphotos.shopofphotos.service.person.PersonService;
 import pl.shopofphotos.shopofphotos.service.photo.PhotoService;
+import pl.shopofphotos.shopofphotos.service.price.PriceService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class DataBaseAppService implements AppService {
   @Autowired private final PhotoService photoService;
+  @Autowired private final AddressService addressService;
+  @Autowired private final PersonService personService;
+  @Autowired private final PriceService priceService;
+  @Autowired private final CameraService cameraService;
 
   @Override
   public void runApp() {
+
+    photoService.deleteAllPhotos();
+    priceService.deleteAllPrices();
+    cameraService.deleteAllCameras();
+    personService.deleteAllPersons();
+    addressService.deleteAllAddresses();
+
     PriceEntity priceEntity = new PriceEntity("123.00", Currency.PLN);
     CameraEntity cameraEntity = new CameraEntity("canon", "e456");
     PhotoEntity photoEntity =
@@ -36,7 +59,25 @@ public class DataBaseAppService implements AppService {
     PhotoEntity photo = photoService.getPhoto(photoIdGeneratedByDb);
     System.out.println(photo);
 
-    photoService.deleteAllPhotos();
+    AddressEntity addressEntity =
+        new AddressEntity(123, "Piłsudskiego", "Lublin", "lubelskie", "20-705", Country.PL);
+    var addressIdGeneratedByDb = addressService.createAddressEntity(addressEntity);
+    PersonEntity authorEntity = new PersonEntity(1, addressIdGeneratedByDb, "Asia", "Szumska");
+    var authorIdGeneratedByDb = personService.addPerson(authorEntity);
+
+    AddressEntity addressOfBuyer =
+        new AddressEntity(124, "Zamkowa", "Lublin", "lubelskie", "20-706", Country.PL);
+    var addressOfBuyerIdGeneratedByDb = addressService.createAddressEntity(addressOfBuyer);
+    PersonEntity buyerEntity =
+        new PersonEntity(1, addressOfBuyerIdGeneratedByDb, "Karol", "Kowalski");
+    var buyerIdGeneratedByDb = personService.addPerson(buyerEntity);
+
+    List<PhotoEntity> photos = new ArrayList<>();
+    photos.add(photoEntity);
+    OnlineOrderMethod onlineOrderMethod = new OnlineOrderMethod();
+
+    OrderEntity orderEntity =
+        new OrderEntity(12, buyerEntity, authorEntity, photos, priceEntity, onlineOrderMethod);
 
     System.out.println(photoService.getPhotos().size());
   }

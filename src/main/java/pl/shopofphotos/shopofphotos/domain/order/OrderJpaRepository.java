@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository;
 import pl.shopofphotos.shopofphotos.domain.order.entity.OrderEntity;
 
 @Repository
-public interface OrderJpaRepository extends JpaRepository<OrderEntity, String> {}
+public interface OrderJpaRepository extends JpaRepository<OrderEntity, Long> {}

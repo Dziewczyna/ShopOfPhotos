@@ -6,7 +6,7 @@ CREATE TABLE price (price_id SERIAL, price VARCHAR, currency VARCHAR, PRIMARY KE
 
 CREATE TABLE address (address_id SERIAL, street VARCHAR, city VARCHAR, state VARCHAR, postal_code VARCHAR, country VARCHAR, PRIMARY KEY(address_id));
 
-CREATE TABLE person (person_id SERIAL, address_id SERIAL, first_name VARCHAR, last_name VARCHAR, street VARCHAR, city VARCHAR, state VARCHAR, postal_code VARCHAR, country VARCHAR, PRIMARY KEY(person_id), CONSTRAINT fk_address FOREIGN KEY (address_id) REFERENCES address(address_id));
+CREATE TABLE person (person_id SERIAL, address_id SERIAL, first_name VARCHAR, last_name VARCHAR, PRIMARY KEY(person_id), CONSTRAINT fk_address FOREIGN KEY (address_id) REFERENCES address(address_id));
 
 CREATE TABLE photo (photo_id SERIAL, price_id SERIAL, author_id VARCHAR, photo_details VARCHAR, camera_id SERIAL, resolution VARCHAR, place_of_photo VARCHAR, category VARCHAR, PRIMARY KEY(photo_id), CONSTRAINT fk_price FOREIGN KEY (price_id) REFERENCES price(price_id), CONSTRAINT fk_camera FOREIGN KEY (camera_id) REFERENCES camera(camera_id));
 

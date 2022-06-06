@@ -1,8 +1,8 @@
-package pl.shopofphotos.shopofphotos.domain.person.entity;
+package pl.shopofphotos.shopofphotos.domain.address.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.shopofphotos.shopofphotos.domain.person.Country;
+import pl.shopofphotos.shopofphotos.domain.address.Country;
 
 import javax.persistence.*;
 

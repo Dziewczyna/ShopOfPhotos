@@ -3,6 +3,7 @@ package pl.shopofphotos.shopofphotos.domain.person;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pl.shopofphotos.shopofphotos.domain.address.Address;
 
 import javax.persistence.*;
 

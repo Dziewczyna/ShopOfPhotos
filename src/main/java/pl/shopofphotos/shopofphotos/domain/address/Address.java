@@ -1,4 +1,4 @@
-package pl.shopofphotos.shopofphotos.domain.person;
+package pl.shopofphotos.shopofphotos.domain.address;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

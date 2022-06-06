@@ -1,9 +1,9 @@
-package pl.shopofphotos.shopofphotos.domain.person.model;
+package pl.shopofphotos.shopofphotos.domain.address.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import pl.shopofphotos.shopofphotos.domain.person.Country;
+import pl.shopofphotos.shopofphotos.domain.address.Country;
 
 @Builder
 @AllArgsConstructor

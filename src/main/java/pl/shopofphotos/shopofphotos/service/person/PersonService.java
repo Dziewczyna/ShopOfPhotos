@@ -17,7 +17,7 @@ public class PersonService {
     return personJpaRepository.findAll();
   }
 
-  public PersonEntity getPerson(String personId) {
+  public PersonEntity getPerson(long personId) {
     Optional<PersonEntity> personEntity = personJpaRepository.findById(personId);
     if (personEntity.isEmpty()) {
       throw new NoPersonException("No person with id " + personId);
@@ -29,7 +29,7 @@ public class PersonService {
     return personJpaRepository.save(personEntity).getPersonId();
   }
 
-  public void deleteAllPhotos() {
+  public void deleteAllPersons() {
     personJpaRepository.deleteAll();
   }
 }
