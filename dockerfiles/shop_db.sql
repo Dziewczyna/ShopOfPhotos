@@ -12,6 +12,8 @@ CREATE TABLE photo (photo_id SERIAL, price_id SERIAL, author_id VARCHAR, photo_d
 
 CREATE TABLE orders (order_id SERIAL, buyer_id SERIAL, author_id SERIAL, photo_id SERIAL, price_id SERIAL, order_method VARCHAR, PRIMARY KEY(order_id), CONSTRAINT fk_buyer FOREIGN KEY (buyer_id) REFERENCES person(person_id), CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES person(person_id), CONSTRAINT fk_price FOREIGN KEY (price_id) REFERENCES price(price_id));
 
+CREATE TABLE orders_photo (order_id SERIAL, photo_id SERIAL, PRIMARY KEY(order_id, photo_id), CONSTRAINT orders_photo_ibfk_1 FOREIGN KEY (order_id) REFERENCES orders (order_id), CONSTRAINT orders_photo_ibfk_2 FOREIGN KEY (photo_id) REFERENCES photo (photo_id));
+
 COMMIT;
 
 CREATE SEQUENCE hibernate_sequence START 1;

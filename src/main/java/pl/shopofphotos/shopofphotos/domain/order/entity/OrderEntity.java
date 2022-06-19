@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-@Table(name = "order")
+@Table(name = "orders")
 @Getter
 public class OrderEntity {
   @Id
@@ -30,8 +30,7 @@ public class OrderEntity {
   @JoinColumn(name = "author_id", referencedColumnName = "person_id")
   public PersonEntity authorId;
 
-  @ManyToMany(cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "photo_id", referencedColumnName = "photo_id")
+  @ManyToMany(mappedBy = "orders", cascade = CascadeType.PERSIST)
   public List<PhotoEntity> photos;
 
   @OneToOne(cascade = CascadeType.PERSIST)

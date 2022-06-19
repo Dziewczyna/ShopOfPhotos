@@ -16,6 +16,7 @@ import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
 import pl.shopofphotos.shopofphotos.service.address.AddressService;
 import pl.shopofphotos.shopofphotos.service.camera.CameraService;
+import pl.shopofphotos.shopofphotos.service.order.OrderService;
 import pl.shopofphotos.shopofphotos.service.person.PersonService;
 import pl.shopofphotos.shopofphotos.service.photo.PhotoService;
 import pl.shopofphotos.shopofphotos.service.price.PriceService;
@@ -31,10 +32,11 @@ public class DataBaseAppService implements AppService {
   @Autowired private final PersonService personService;
   @Autowired private final PriceService priceService;
   @Autowired private final CameraService cameraService;
+  @Autowired private final OrderService orderService;
 
   @Override
   public void runApp() {
-
+    //    orderService.deleteAllOrders();
     photoService.deleteAllPhotos();
     priceService.deleteAllPrices();
     cameraService.deleteAllCameras();
@@ -69,7 +71,7 @@ public class DataBaseAppService implements AppService {
         new AddressEntity(124, "Zamkowa", "Lublin", "lubelskie", "20-706", Country.PL);
     var addressOfBuyerIdGeneratedByDb = addressService.createAddressEntity(addressOfBuyer);
     PersonEntity buyerEntity =
-        new PersonEntity(1, addressOfBuyerIdGeneratedByDb, "Karol", "Kowalski");
+        new PersonEntity(144, addressOfBuyerIdGeneratedByDb, "Karol", "Kowalski");
     var buyerIdGeneratedByDb = personService.addPerson(buyerEntity);
 
     List<PhotoEntity> photos = new ArrayList<>();
@@ -78,6 +80,7 @@ public class DataBaseAppService implements AppService {
 
     OrderEntity orderEntity =
         new OrderEntity(12, buyerEntity, authorEntity, photos, priceEntity, onlineOrderMethod);
+    //    var orderIdGeneratedByDb = orderService.addOrder(orderEntity);
 
     System.out.println(photoService.getPhotos().size());
   }

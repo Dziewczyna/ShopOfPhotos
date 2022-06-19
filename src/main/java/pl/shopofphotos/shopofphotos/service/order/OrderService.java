@@ -1,12 +1,14 @@
 package pl.shopofphotos.shopofphotos.service.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.order.OrderJpaRepository;
 import pl.shopofphotos.shopofphotos.domain.order.entity.OrderEntity;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class OrderService {
   @Autowired private OrderJpaRepository orderJpaRepository;
 
