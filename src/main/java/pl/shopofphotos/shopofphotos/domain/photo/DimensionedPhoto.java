@@ -9,6 +9,7 @@ public class DimensionedPhoto extends PhotoEntity {
 
   public DimensionedPhoto(Dimension dimension, PhotoEntity photo) {
     super(
+        photo.getOrders(),
         photo.getPhotoId(),
         photo.getPrice(),
         photo.getAuthorId(),
