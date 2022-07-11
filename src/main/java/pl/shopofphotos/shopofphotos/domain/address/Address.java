@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Address {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column(name = "address_id")
   private long addressId;
 

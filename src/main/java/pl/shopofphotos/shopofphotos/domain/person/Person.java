@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Person {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column(name = "person_id")
   private long personId;
 
@@ -24,7 +24,9 @@ public class Person {
   @Column(name = "last_name")
   private String lastName;
 
-  @OneToOne(cascade = CascadeType.PERSIST)
+  @OneToOne(
+          cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
+          fetch = FetchType.EAGER)
   @JoinColumn(name = "address_id", referencedColumnName = "address_id")
   private Address address;
 

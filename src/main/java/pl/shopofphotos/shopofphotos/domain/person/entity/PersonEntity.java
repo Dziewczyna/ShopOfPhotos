@@ -18,7 +18,9 @@ public class PersonEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long personId;
 
-  @OneToOne(cascade = CascadeType.PERSIST)
+  @OneToOne(
+          cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
+          fetch = FetchType.EAGER)
   @JoinColumn(name = "address_id", referencedColumnName = "address_id")
   private AddressEntity address;
 

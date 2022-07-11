@@ -18,22 +18,29 @@ import java.util.List;
 @Getter
 public class OrderEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @SequenceGenerator(name = "hibernate_sequence", allocationSize = 1)
   @Column(name = "order_id")
   public long orderId;
 
-  @OneToOne(cascade = CascadeType.PERSIST)
+  @OneToOne(
+      cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
+      fetch = FetchType.EAGER)
   @JoinColumn(name = "buyer_id", referencedColumnName = "person_id")
   public PersonEntity buyerId;
 
-  @OneToOne(cascade = CascadeType.PERSIST)
+  @OneToOne(
+      cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
+      fetch = FetchType.EAGER)
   @JoinColumn(name = "author_id", referencedColumnName = "person_id")
   public PersonEntity authorId;
 
   @ManyToMany(mappedBy = "orders", cascade = CascadeType.PERSIST)
   public List<PhotoEntity> photos;
 
-  @OneToOne(cascade = CascadeType.PERSIST)
+  @OneToOne(
+      cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
+      fetch = FetchType.EAGER)
   @JoinColumn(name = "price_id", referencedColumnName = "price_id")
   public PriceEntity price;
 

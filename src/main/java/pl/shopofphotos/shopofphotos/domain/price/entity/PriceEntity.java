@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class PriceEntity {
   @Id
   @Column(name = "price_id")
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "hibernate_sequence")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequence")
   private long priceId;
 
   @Column(name = "price")

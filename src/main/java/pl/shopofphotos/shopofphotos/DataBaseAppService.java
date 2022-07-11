@@ -36,7 +36,7 @@ public class DataBaseAppService implements AppService {
 
   @Override
   public void runApp() {
-    //    orderService.deleteAllOrders();
+    orderService.deleteAllOrders();
     photoService.deleteAllPhotos();
     priceService.deleteAllPrices();
     cameraService.deleteAllCameras();
@@ -52,7 +52,7 @@ public class DataBaseAppService implements AppService {
             "details",
             cameraEntity,
             Resolution.resolution1051,
-            "krakow",
+            "Krakow",
             Category.ANIMALS);
 
     var photoIdGeneratedByDb = photoService.addPhoto(photoEntity);
@@ -63,24 +63,19 @@ public class DataBaseAppService implements AppService {
 
     AddressEntity addressEntity =
         new AddressEntity(123, "Piłsudskiego", "Lublin", "lubelskie", "20-705", Country.PL);
-    var addressIdGeneratedByDb = addressService.createAddressEntity(addressEntity);
-    PersonEntity authorEntity = new PersonEntity(1, addressIdGeneratedByDb, "Asia", "Szumska");
-    var authorIdGeneratedByDb = personService.addPerson(authorEntity);
+    PersonEntity authorEntity = new PersonEntity(1, addressEntity, "Asia", "Szumska");
 
     AddressEntity addressOfBuyer =
         new AddressEntity(124, "Zamkowa", "Lublin", "lubelskie", "20-706", Country.PL);
-    var addressOfBuyerIdGeneratedByDb = addressService.createAddressEntity(addressOfBuyer);
-    PersonEntity buyerEntity =
-        new PersonEntity(144, addressOfBuyerIdGeneratedByDb, "Karol", "Kowalski");
-    var buyerIdGeneratedByDb = personService.addPerson(buyerEntity);
+    PersonEntity buyerEntity = new PersonEntity(144, addressOfBuyer, "Karol", "Kowalski");
 
     List<PhotoEntity> photos = new ArrayList<>();
     photos.add(photoEntity);
     OnlineOrderMethod onlineOrderMethod = new OnlineOrderMethod();
 
     OrderEntity orderEntity =
-        new OrderEntity(12, buyerEntity, authorEntity, photos, priceEntity, onlineOrderMethod);
-    //    var orderIdGeneratedByDb = orderService.addOrder(orderEntity);
+        new OrderEntity(15, buyerEntity, authorEntity, photos, priceEntity, onlineOrderMethod);
+    var orderIdGeneratedByDb = orderService.addOrder(orderEntity);
 
     System.out.println(photoService.getPhotos().size());
   }
