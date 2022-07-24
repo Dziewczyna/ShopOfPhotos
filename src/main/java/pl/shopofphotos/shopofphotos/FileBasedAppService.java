@@ -1,5 +1,6 @@
 package pl.shopofphotos.shopofphotos;
 
+import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.Category;
 import pl.shopofphotos.shopofphotos.domain.PlaceOfPhoto;
@@ -14,8 +15,6 @@ import pl.shopofphotos.shopofphotos.domain.price.Currency;
 import pl.shopofphotos.shopofphotos.domain.price.model.PriceModel;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
 
-import java.math.BigDecimal;
-
 @Service
 public class FileBasedAppService implements AppService {
   private final PersonRepository fileBasedPersonRepository = new FileBasedPersonRepository();
@@ -23,7 +22,7 @@ public class FileBasedAppService implements AppService {
   @Override
   public void runApp() {
     CameraModel camera = new CameraModel("Sony", "Cyber-shot DSC-RX10 III");
-    Resolution resolution = Resolution.resolution1205;
+    Resolution resolution = Resolution.RESOLUTION_1205_x_1795;
     PlaceOfPhoto placeOfPhoto = new PlaceOfPhoto("Lublin");
     Category category = Category.ANIMALS;
     PriceModel price = new PriceModel(new BigDecimal("123.00"), Currency.PLN);

@@ -1,11 +1,17 @@
 package pl.shopofphotos.shopofphotos.domain.price.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pl.shopofphotos.shopofphotos.domain.price.Currency;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "price")
@@ -22,6 +28,7 @@ public class PriceEntity {
   private String price;
 
   @Column(name = "currency")
+  @Enumerated(EnumType.STRING)
   private Currency currency;
 
   public PriceEntity(String price, Currency currency) {
