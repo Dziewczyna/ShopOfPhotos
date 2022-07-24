@@ -1,5 +1,19 @@
 package pl.shopofphotos.shopofphotos.domain.photo.entity;
 
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,9 +22,6 @@ import pl.shopofphotos.shopofphotos.domain.camera.entity.CameraEntity;
 import pl.shopofphotos.shopofphotos.domain.order.entity.OrderEntity;
 import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 import pl.shopofphotos.shopofphotos.domain.resolution.Resolution;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -40,10 +51,12 @@ public class PhotoEntity {
   @JoinColumn(name = "camera_id", referencedColumnName = "camera_id")
   private CameraEntity cameraEntity;
   @Column(name = "resolution")
+  @Enumerated(EnumType.STRING)
   private Resolution resolution;
   @Column(name = "place_of_photo")
   private String placeOfPhoto;
   @Column(name = "category")
+  @Enumerated(EnumType.STRING)
   private Category category;
 
   public PhotoEntity(

@@ -6,7 +6,7 @@ INSERT INTO address(street, city, state, postal_code, country) VALUES('Zabawna 3
 INSERT INTO address(street, city, state, postal_code, country) VALUES('Chabrowa 3/9', 'Warszawa', 'mazowieckie', '00-791', 'PL');
 INSERT INTO person(address_id, first_name, last_name) VALUES(1, 'Katarzyna', 'Marchewka');
 INSERT INTO person(address_id, first_name, last_name) VALUES(2, 'Tomasz', 'McVay');
-INSERT INTO photo(price_id, author_id, photo_details, camera_id, resolution, place_of_photo, category) VALUES(1,'1','Photo details 1',1,'1500 x 2102','Lublin','HUMAN');
-INSERT INTO photo(price_id, author_id, photo_details, camera_id, resolution, place_of_photo, category) VALUES(2,'2','Photo details 2',2,'1795 x 2551','Warszawa','ARCHITECTURE');
+INSERT INTO photo(price_id, author_id, photo_details, camera_id, resolution, place_of_photo, category) VALUES(1,'1','Photo details 1',1,'RESOLUTION_1500_x_2102','Lublin','HUMAN');
+INSERT INTO photo(price_id, author_id, photo_details, camera_id, resolution, place_of_photo, category) VALUES(2,'2','Photo details 2',2,'RESOLUTION_1795_x_2551','Warszawa','ARCHITECTURE');
 INSERT INTO orders(buyer_id, author_id, photo_id, price_id, order_method) VALUES(1,1,1,1,'ONLINE');
 INSERT INTO orders(buyer_id, author_id, photo_id, price_id, order_method) VALUES(2,2,2,2,'ONLINE');

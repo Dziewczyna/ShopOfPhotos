@@ -1,5 +1,7 @@
 package pl.shopofphotos.shopofphotos;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,6 @@ import pl.shopofphotos.shopofphotos.service.order.OrderService;
 import pl.shopofphotos.shopofphotos.service.person.PersonService;
 import pl.shopofphotos.shopofphotos.service.photo.PhotoService;
 import pl.shopofphotos.shopofphotos.service.price.PriceService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -51,7 +50,7 @@ public class DataBaseAppService implements AppService {
             "Joasia",
             "details",
             cameraEntity,
-            Resolution.resolution1051,
+            Resolution.RESOLUTION_1051_x_1535,
             "Krakow",
             Category.ANIMALS);
 

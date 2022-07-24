@@ -1,15 +1,16 @@
 package pl.shopofphotos.shopofphotos.service.photo;
 
+import java.util.List;
+import java.util.Optional;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.photo.NoPhotoException;
 import pl.shopofphotos.shopofphotos.domain.photo.PhotoJpaRepository;
 import pl.shopofphotos.shopofphotos.domain.photo.entity.PhotoEntity;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
+@AllArgsConstructor
 public class PhotoService {
   @Autowired private PhotoJpaRepository photoJpaRepository;
 
