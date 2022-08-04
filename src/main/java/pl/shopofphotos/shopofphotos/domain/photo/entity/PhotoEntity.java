@@ -40,10 +40,12 @@ public class PhotoEntity {
   @JoinColumn(name = "camera_id", referencedColumnName = "camera_id")
   private CameraEntity cameraEntity;
   @Column(name = "resolution")
+  @Enumerated(EnumType.STRING)
   private Resolution resolution;
   @Column(name = "place_of_photo")
   private String placeOfPhoto;
   @Column(name = "category")
+  @Enumerated(EnumType.STRING)
   private Category category;
 
   public PhotoEntity(

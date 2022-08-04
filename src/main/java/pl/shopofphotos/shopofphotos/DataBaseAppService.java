@@ -51,7 +51,7 @@ public class DataBaseAppService implements AppService {
             "Joasia",
             "details",
             cameraEntity,
-            Resolution.resolution1051,
+            Resolution.RESOLUTION_1051_x_1535,
             "Krakow",
             Category.ANIMALS);
 

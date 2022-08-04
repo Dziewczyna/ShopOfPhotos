@@ -16,4 +16,4 @@ CREATE TABLE orders_photo (order_id SERIAL, photo_id SERIAL, PRIMARY KEY(order_i
 
 COMMIT;
 
-CREATE SEQUENCE hibernate_sequence START 1;
+CREATE SEQUENCE hibernate_sequence START WITH 1 INCREMENT BY 1;
