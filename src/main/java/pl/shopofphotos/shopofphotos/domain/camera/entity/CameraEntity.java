@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class CameraEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequence")
+  @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "hibernate_sequence")
   @SequenceGenerator(name = "hibernate_sequence", allocationSize = 1)
   @Column(name = "camera_id")
   private long cameraId;

@@ -1,5 +1,6 @@
 package pl.shopofphotos.shopofphotos.service.camera;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.camera.CameraJpaRepository;
@@ -9,6 +10,7 @@ import pl.shopofphotos.shopofphotos.domain.camera.entity.CameraEntity;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class CameraService {
   @Autowired private CameraJpaRepository cameraJpaRepository;
@@ -17,7 +19,7 @@ public class CameraService {
     return cameraJpaRepository.findAll();
   }
 
-  public CameraEntity getCamera(String cameraId) {
+  public CameraEntity getCamera(long cameraId) {
     Optional<CameraEntity> cameraEntity = cameraJpaRepository.findById(cameraId);
     if (cameraEntity.isEmpty()) {
       throw new NoCameraException("No camera with id " + cameraId);
