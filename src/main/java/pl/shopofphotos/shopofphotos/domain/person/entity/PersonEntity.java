@@ -22,6 +22,7 @@ public class PersonEntity {
           cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
           fetch = FetchType.EAGER)
   @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+  @Enumerated(EnumType.STRING)
   private AddressEntity address;
 
   @Column(name = "first_name")

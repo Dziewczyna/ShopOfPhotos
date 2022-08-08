@@ -38,7 +38,7 @@ public class PhotoServiceIntegrationTest {
     }
 
     private void assertPhoto(PhotoEntity photo, int expectedId, String expectedPhotoDetails, String expectedPlace,
-                             String expectedAuthorId, Category expectedCategory, Resolution expectedRes) {
+                             String expectedAuthorId, Category expectedCategory, Resolution expectedResolution) {
         assertEquals(expectedId, photo.getPhotoId());
         assertEquals(expectedPhotoDetails, photo.getPhotoDetails());
         assertEquals(expectedPlace, photo.getPlaceOfPhoto());
@@ -46,7 +46,7 @@ public class PhotoServiceIntegrationTest {
         assertNotNull(photo.getOrders());
         assertNotNull(photo.getCameraEntity());
         assertEquals(expectedCategory, photo.getCategory());
-        assertEquals(expectedRes, photo.getResolution());
+        assertEquals(expectedResolution, photo.getResolution());
         assertNotNull(photo.getPrice());
     }
 }

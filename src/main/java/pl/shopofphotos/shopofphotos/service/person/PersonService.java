@@ -1,5 +1,6 @@
 package pl.shopofphotos.shopofphotos.service.person;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.shopofphotos.shopofphotos.domain.person.NoPersonException;
@@ -9,6 +10,7 @@ import pl.shopofphotos.shopofphotos.domain.person.entity.PersonEntity;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class PersonService {
   @Autowired private PersonJpaRepository personJpaRepository;
