@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 public class OrderEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @SequenceGenerator(name = "hibernate_sequence", allocationSize = 1)
   @Column(name = "order_id")
   public long orderId;
@@ -42,6 +42,7 @@ public class OrderEntity {
       cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH},
       fetch = FetchType.EAGER)
   @JoinColumn(name = "price_id", referencedColumnName = "price_id")
+  @Enumerated(EnumType.STRING)
   public PriceEntity price;
 
   @Transient private OrderMethod orderMethod;

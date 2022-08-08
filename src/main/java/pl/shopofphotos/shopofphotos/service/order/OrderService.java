@@ -1,13 +1,16 @@
 package pl.shopofphotos.shopofphotos.service.order;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.shopofphotos.shopofphotos.domain.order.NoOrderException;
 import pl.shopofphotos.shopofphotos.domain.order.OrderJpaRepository;
 import pl.shopofphotos.shopofphotos.domain.order.entity.OrderEntity;
 
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class OrderService {
   @Autowired private OrderJpaRepository orderJpaRepository;
@@ -16,10 +19,10 @@ public class OrderService {
     return orderJpaRepository.findAll();
   }
 
-  public OrderEntity getOrder(String orderId) {
-    Optional<OrderEntity> orderEntity = orderJpaRepository.findById(Long.valueOf(orderId));
+  public OrderEntity getOrder(long orderId) {
+    Optional<OrderEntity> orderEntity = orderJpaRepository.findById(orderId);
     if (orderEntity.isEmpty()) {
-      throw new IllegalArgumentException("No order with id " + orderId);
+      throw new NoOrderException("No order with id " + orderId);
     }
     return orderEntity.get();
   }
