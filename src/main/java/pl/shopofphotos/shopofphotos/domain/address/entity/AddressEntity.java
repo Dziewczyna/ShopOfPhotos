@@ -29,6 +29,7 @@ public class AddressEntity {
   private String postalCode;
 
   @Column(name = "country")
+  @Enumerated(EnumType.STRING)
   private Country country;
 
   public AddressEntity(
