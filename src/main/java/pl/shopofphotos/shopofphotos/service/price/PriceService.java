@@ -1,13 +1,16 @@
 package pl.shopofphotos.shopofphotos.service.price;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.shopofphotos.shopofphotos.domain.price.NoPriceException;
 import pl.shopofphotos.shopofphotos.domain.price.PriceJpaRepository;
 import pl.shopofphotos.shopofphotos.domain.price.entity.PriceEntity;
 
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class PriceService {
   @Autowired private PriceJpaRepository priceJpaRepository;
@@ -16,10 +19,10 @@ public class PriceService {
     return priceJpaRepository.findAll();
   }
 
-  public PriceEntity getPrice(String priceId) {
-    Optional<PriceEntity> priceEntity = priceJpaRepository.findById(Long.valueOf(priceId));
+  public PriceEntity getPrice(long priceId) {
+    Optional<PriceEntity> priceEntity = priceJpaRepository.findById(priceId);
     if (priceEntity.isEmpty()) {
-      throw new IllegalArgumentException("No price with id " + priceId);
+      throw new NoPriceException("No price with id " + priceId);
     }
     return priceEntity.get();
   }
